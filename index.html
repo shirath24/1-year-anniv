@@ -1,627 +1,1297 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#12061f">
-<title>Firda ♥ Shirath — One Year Rewind</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#12061f;
-  --paper:#fff8f0;
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta Sans',system-ui,sans-serif;user-select:none;-webkit-user-select:none}
-#stage{position:fixed;inset:0;margin:auto;width:100%;height:100%;max-width:520px;overflow:hidden;background:var(--ink)}
-@media(min-width:521px){#stage{height:min(100%,924px);border-radius:24px;box-shadow:0 0 80px rgba(255,255,255,.08)}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#12061f">
+  <title>Firda ♥ Shirath — One Year Rewind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #12061f;
+      --paper: #fff8f0;
+    }
 
-/* ---------- progress bars ---------- */
-#bars{position:absolute;top:0;left:0;right:0;display:flex;gap:4px;padding:max(10px,env(safe-area-inset-top)) 10px 0;z-index:60;opacity:0;transition:opacity .4s}
-#bars.show{opacity:1}
-#bars .bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.28);overflow:hidden}
-#bars .bar i{display:block;height:100%;width:0%;background:#fff;border-radius:3px}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent
+    }
 
-/* ---------- controls ---------- */
-#mute{position:absolute;top:max(22px,calc(env(safe-area-inset-top) + 14px));right:12px;z-index:70;width:38px;height:38px;border-radius:50%;border:none;background:rgba(0,0,0,.35);color:#fff;font-size:17px;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
-#mute.show{display:flex}
-#tapL,#tapR{position:absolute;top:0;bottom:0;width:38%;z-index:50}
-#tapL{left:0}#tapR{right:0;width:62%}
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      user-select: none;
+      -webkit-user-select: none
+    }
 
-/* ---------- slides ---------- */
-.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:76px 26px 60px;overflow:hidden;color:#fff}
-.slide.active{display:flex;animation:slideIn .55s cubic-bezier(.22,1,.36,1)}
-@keyframes slideIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
-.kicker{font-size:13px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:0;animation:rise .6s .15s forwards}
-.big{font-family:'Unbounded';font-weight:900;line-height:1.02;opacity:0;animation:rise .6s .3s forwards}
-.sub{font-size:15.5px;line-height:1.55;font-weight:600;opacity:0;animation:rise .6s .55s forwards}
-.note{font-size:12.5px;opacity:0;animation:rise .6s .8s forwards;font-weight:600}
-@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-.delay1{animation-delay:.45s!important}.delay2{animation-delay:.7s!important}.delay3{animation-delay:.95s!important}.delay4{animation-delay:1.2s!important}.delay5{animation-delay:1.5s!important}
-.chip{display:inline-block;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    #stage {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      max-width: 520px;
+      overflow: hidden;
+      background: var(--ink)
+    }
 
-/* decorative blobs */
-.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none;animation:drift 9s ease-in-out infinite alternate}
-@keyframes drift{from{transform:translate(-12px,-10px) scale(1)}to{transform:translate(16px,14px) scale(1.15)}}
+    @media(min-width:521px) {
+      #stage {
+        height: min(100%, 924px);
+        border-radius: 24px;
+        box-shadow: 0 0 80px rgba(255, 255, 255, .08)
+      }
+    }
 
-/* count-up number */
-.num{font-variant-numeric:tabular-nums}
+    /* ---------- progress bars ---------- */
+    #bars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      gap: 4px;
+      padding: max(10px, env(safe-area-inset-top)) 10px 0;
+      z-index: 60;
+      opacity: 0;
+      transition: opacity .4s
+    }
 
-/* stat bars (vs) */
-.vs{display:flex;flex-direction:column;gap:14px;margin-top:22px}
-.vsrow{opacity:0;animation:rise .6s forwards}
-.vsrow .lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-bottom:6px}
-.meter{height:16px;border-radius:10px;background:rgba(255,255,255,.18);overflow:hidden}
-.meter i{display:block;height:100%;width:0;border-radius:10px;transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+    #bars.show {
+      opacity: 1
+    }
 
-/* quiz */
-.qopts{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-.qopt{position:relative;z-index:55;border:2.5px solid rgba(255,255,255,.85);background:rgba(255,255,255,.08);color:#fff;border-radius:16px;padding:15px 18px;font-family:inherit;font-size:15.5px;font-weight:800;text-align:left;opacity:0;animation:rise .5s forwards;backdrop-filter:blur(4px);cursor:pointer}
-.qopt:active{transform:scale(.97)}
-.qopt.correct{background:#3ddc84;border-color:#2bb96a;color:#06341c;opacity:1!important;animation:pop .5s}
-.qopt.wrong{opacity:.35!important;text-decoration:line-through;animation:shake .4s}
-@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.06)}100%{transform:scale(1)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
-.reveal{margin-top:20px;opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.22,1,.36,1);pointer-events:none}
-.reveal.show{opacity:1;transform:none}
-.bubble{background:#fff;color:var(--ink);border-radius:18px 18px 18px 4px;padding:13px 16px;font-size:14.5px;font-weight:600;max-width:88%;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-.bubble .who{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:3px}
-.bubble.me{border-radius:18px 18px 4px 18px;margin-left:auto;background:#dcf8c6}
+    #bars .bar {
+      flex: 1;
+      height: 3px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .28);
+      overflow: hidden
+    }
 
-/* floating emoji rain */
-.floaty{position:absolute;top:-8%;font-size:26px;pointer-events:none;animation:fall linear infinite;opacity:.85}
-@keyframes fall{to{transform:translateY(115vh) rotate(340deg)}}
+    #bars .bar i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 3px
+    }
 
-/* hearts on cover */
-.heart{position:absolute;bottom:-10%;pointer-events:none;animation:floatUp linear infinite;opacity:.75}
-@keyframes floatUp{to{transform:translateY(-118vh) rotate(30deg);opacity:0}}
+    /* ---------- controls ---------- */
+    #mute {
+      position: absolute;
+      top: max(22px, calc(env(safe-area-inset-top) + 14px));
+      right: 12px;
+      z-index: 70;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, .35);
+      color: #fff;
+      font-size: 17px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px)
+    }
 
-/* phone rings */
-.rings{position:relative;width:120px;height:120px;margin:6px auto 18px;opacity:0;animation:rise .6s .4s forwards}
-.rings .core{position:absolute;inset:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:30px}
-.rings .r{position:absolute;inset:0;border-radius:50%;border:2.5px solid rgba(255,255,255,.75);animation:ring 2.2s ease-out infinite}
-.rings .r:nth-child(2){animation-delay:.7s}.rings .r:nth-child(3){animation-delay:1.4s}
-@keyframes ring{from{transform:scale(.6);opacity:1}to{transform:scale(1.9);opacity:0}}
+    #mute.show {
+      display: flex
+    }
 
-/* wkwk bounce */
-.wk{display:inline-block;animation:bounce 1s ease-in-out infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    #tapL,
+    #tapR {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 38%;
+      z-index: 50
+    }
 
-/* typewriter caret */
-.tw::after{content:'▌';animation:blink 1s steps(1) infinite;font-size:.8em}
-@keyframes blink{50%{opacity:0}}
+    #tapL {
+      left: 0
+    }
 
-/* final grid */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
-.cell{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:11px 12px;opacity:0;animation:rise .5s forwards;backdrop-filter:blur(4px)}
-.cell b{display:block;font-family:'Unbounded';font-size:19px;font-weight:900}
-.cell span{font-size:10.5px;font-weight:700;letter-spacing:.04em;opacity:.85;text-transform:uppercase}
+    #tapR {
+      right: 0;
+      width: 62%
+    }
 
-/* start button */
-#startBtn{margin-top:34px;padding:16px 42px;border-radius:999px;border:none;font-family:'Unbounded';font-weight:700;font-size:15px;background:#fff;color:#7b2ff7;box-shadow:0 10px 40px rgba(255,255,255,.35);opacity:0;animation:rise .7s 1s forwards, pulse 1.8s 1.8s ease-in-out infinite;z-index:55;position:relative}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-#replayBtn{margin-top:22px;padding:13px 34px;border-radius:999px;border:2px solid #fff;background:transparent;color:#fff;font-family:'Unbounded';font-weight:700;font-size:13px;opacity:0;animation:rise .6s 2s forwards;position:relative;z-index:55}
+    /* ---------- slides ---------- */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding: 76px 26px 60px;
+      overflow: hidden;
+      color: #fff
+    }
 
-#confetti{position:absolute;inset:0;pointer-events:none;z-index:10}
-/* finale fits small screens */
-#finale{padding-top:58px;padding-bottom:24px;justify-content:center}
-#finale .grid{gap:8px;margin-top:12px}
-#finale .cell{padding:9px 10px}
-#finale .cell b{font-size:16px}
-#finale .cell span{font-size:9.5px}
-@media(max-height:800px){
-  #finale .grid{gap:6px;margin-top:10px}
-  #finale .cell{padding:7px 9px;border-radius:11px}
-  #finale .cell b{font-size:14px}
-  #finale .cell span{font-size:8.5px}
-  #finale .sub{font-size:13px;margin-top:12px!important}
-  #finale #replayBtn{margin-top:12px;padding:10px 26px;font-size:12px}
-}
+    .slide.active {
+      display: flex;
+      animation: slideIn .55s cubic-bezier(.22, 1, .36, 1)
+    }
 
-/* slide content paints above confetti */
-.kicker,.big,.sub,.note,.grid,.vs,.qopts,.reveal,.rings,.chip{position:relative;z-index:45}
-.qopts{z-index:55}   /* quiz buttons must sit above the tap zones (50) to stay clickable */
-.sun{position:absolute;left:50%;transform:translateX(-50%);bottom:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#ffe37e,#ff9d5c 70%,transparent 72%);filter:blur(2px);animation:sunrise 2.4s ease-out forwards;opacity:.9;pointer-events:none}
-@keyframes sunrise{from{transform:translateX(-50%) translateY(160px)}to{transform:translateX(-50%) translateY(0)}}
-</style>
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: scale(1.04)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: rise .6s .15s forwards
+    }
+
+    .big {
+      font-family: 'Unbounded';
+      font-weight: 900;
+      line-height: 1.02;
+      opacity: 0;
+      animation: rise .6s .3s forwards
+    }
+
+    .sub {
+      font-size: 15.5px;
+      line-height: 1.55;
+      font-weight: 600;
+      opacity: 0;
+      animation: rise .6s .55s forwards
+    }
+
+    .note {
+      font-size: 12.5px;
+      opacity: 0;
+      animation: rise .6s .8s forwards;
+      font-weight: 600
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(26px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .delay1 {
+      animation-delay: .45s !important
+    }
+
+    .delay2 {
+      animation-delay: .7s !important
+    }
+
+    .delay3 {
+      animation-delay: .95s !important
+    }
+
+    .delay4 {
+      animation-delay: 1.2s !important
+    }
+
+    .delay5 {
+      animation-delay: 1.5s !important
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase
+    }
+
+    /* decorative blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .55;
+      pointer-events: none;
+      animation: drift 9s ease-in-out infinite alternate
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(-12px, -10px) scale(1)
+      }
+
+      to {
+        transform: translate(16px, 14px) scale(1.15)
+      }
+    }
+
+    /* count-up number */
+    .num {
+      font-variant-numeric: tabular-nums
+    }
+
+    /* stat bars (vs) */
+    .vs {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 22px
+    }
+
+    .vsrow {
+      opacity: 0;
+      animation: rise .6s forwards
+    }
+
+    .vsrow .lbl {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 6px
+    }
+
+    .meter {
+      height: 16px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .18);
+      overflow: hidden
+    }
+
+    .meter i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 10px;
+      transition: width 1.3s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    /* quiz */
+    .qopts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px
+    }
+
+    .qopt {
+      position: relative;
+      z-index: 55;
+      border: 2.5px solid rgba(255, 255, 255, .85);
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      border-radius: 16px;
+      padding: 15px 18px;
+      font-family: inherit;
+      font-size: 15.5px;
+      font-weight: 800;
+      text-align: left;
+      opacity: 0;
+      animation: rise .5s forwards;
+      backdrop-filter: blur(4px);
+      cursor: pointer
+    }
+
+    .qopt:active {
+      transform: scale(.97)
+    }
+
+    .qopt.correct {
+      background: #3ddc84;
+      border-color: #2bb96a;
+      color: #06341c;
+      opacity: 1 !important;
+      animation: pop .5s
+    }
+
+    .qopt.wrong {
+      opacity: .35 !important;
+      text-decoration: line-through;
+      animation: shake .4s
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(1)
+      }
+
+      40% {
+        transform: scale(1.06)
+      }
+
+      100% {
+        transform: scale(1)
+      }
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      25% {
+        transform: translateX(-7px)
+      }
+
+      75% {
+        transform: translateX(7px)
+      }
+    }
+
+    .reveal {
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .6s cubic-bezier(.22, 1, .36, 1);
+      pointer-events: none
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none
+    }
+
+    .bubble {
+      background: #fff;
+      color: var(--ink);
+      border-radius: 18px 18px 18px 4px;
+      padding: 13px 16px;
+      font-size: 14.5px;
+      font-weight: 600;
+      max-width: 88%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .25)
+    }
+
+    .bubble .who {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .55;
+      margin-bottom: 3px
+    }
+
+    .bubble.me {
+      border-radius: 18px 18px 4px 18px;
+      margin-left: auto;
+      background: #dcf8c6
+    }
+
+    /* floating emoji rain */
+    .floaty {
+      position: absolute;
+      top: -8%;
+      font-size: 26px;
+      pointer-events: none;
+      animation: fall linear infinite;
+      opacity: .85
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(115vh) rotate(340deg)
+      }
+    }
+
+    /* hearts on cover */
+    .heart {
+      position: absolute;
+      bottom: -10%;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+      opacity: .75
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-118vh) rotate(30deg);
+        opacity: 0
+      }
+    }
+
+    /* phone rings */
+    .rings {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 6px auto 18px;
+      opacity: 0;
+      animation: rise .6s .4s forwards
+    }
+
+    .rings .core {
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px
+    }
+
+    .rings .r {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255, 255, 255, .75);
+      animation: ring 2.2s ease-out infinite
+    }
+
+    .rings .r:nth-child(2) {
+      animation-delay: .7s
+    }
+
+    .rings .r:nth-child(3) {
+      animation-delay: 1.4s
+    }
+
+    @keyframes ring {
+      from {
+        transform: scale(.6);
+        opacity: 1
+      }
+
+      to {
+        transform: scale(1.9);
+        opacity: 0
+      }
+    }
+
+    /* wkwk bounce */
+    .wk {
+      display: inline-block;
+      animation: bounce 1s ease-in-out infinite
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-14px)
+      }
+    }
+
+    /* typewriter caret */
+    .tw::after {
+      content: '▌';
+      animation: blink 1s steps(1) infinite;
+      font-size: .8em
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0
+      }
+    }
+
+    /* final grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 18px
+    }
+
+    .cell {
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 14px;
+      padding: 11px 12px;
+      opacity: 0;
+      animation: rise .5s forwards;
+      backdrop-filter: blur(4px)
+    }
+
+    .cell b {
+      display: block;
+      font-family: 'Unbounded';
+      font-size: 19px;
+      font-weight: 900
+    }
+
+    .cell span {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      opacity: .85;
+      text-transform: uppercase
+    }
+
+    /* start button */
+    #startBtn {
+      margin-top: 34px;
+      padding: 16px 42px;
+      border-radius: 999px;
+      border: none;
+      font-family: 'Unbounded';
+      font-weight: 700;
+      font-size: 15px;
+      background: #fff;
+      color: #7b2ff7;
+      box-shadow: 0 10px 40px rgba(255, 255, 255, .35);
+      opacity: 0;
+      animation: rise .7s 1s forwards, pulse 1.8s 1.8s ease-in-out infinite;
+      z-index: 55;
+      position: relative
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.05)
+      }
+    }
+
+    #replayBtn {
+      margin-top: 22px;
+      padding: 13px 34px;
+      border-radius: 999px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      font-family: 'Unbounded';
+      font-weight: 700;
+      font-size: 13px;
+      opacity: 0;
+      animation: rise .6s 2s forwards;
+      position: relative;
+      z-index: 55
+    }
+
+    #confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10
+    }
+
+    /* finale fits small screens */
+    #finale {
+      padding-top: 58px;
+      padding-bottom: 24px;
+      justify-content: center
+    }
+
+    #finale .grid {
+      gap: 8px;
+      margin-top: 12px
+    }
+
+    #finale .cell {
+      padding: 9px 10px
+    }
+
+    #finale .cell b {
+      font-size: 16px
+    }
+
+    #finale .cell span {
+      font-size: 9.5px
+    }
+
+    @media(max-height:800px) {
+      #finale .grid {
+        gap: 6px;
+        margin-top: 10px
+      }
+
+      #finale .cell {
+        padding: 7px 9px;
+        border-radius: 11px
+      }
+
+      #finale .cell b {
+        font-size: 14px
+      }
+
+      #finale .cell span {
+        font-size: 8.5px
+      }
+
+      #finale .sub {
+        font-size: 13px;
+        margin-top: 12px !important
+      }
+
+      #finale #replayBtn {
+        margin-top: 12px;
+        padding: 10px 26px;
+        font-size: 12px
+      }
+    }
+
+    /* slide content paints above confetti */
+    .kicker,
+    .big,
+    .sub,
+    .note,
+    .grid,
+    .vs,
+    .qopts,
+    .reveal,
+    .rings,
+    .chip {
+      position: relative;
+      z-index: 45
+    }
+
+    .qopts {
+      z-index: 55
+    }
+
+    /* quiz buttons must sit above the tap zones (50) to stay clickable */
+    .sun {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -90px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffe37e, #ff9d5c 70%, transparent 72%);
+      filter: blur(2px);
+      animation: sunrise 2.4s ease-out forwards;
+      opacity: .9;
+      pointer-events: none
+    }
+
+    @keyframes sunrise {
+      from {
+        transform: translateX(-50%) translateY(160px)
+      }
+
+      to {
+        transform: translateX(-50%) translateY(0)
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div id="stage">
-  <div id="bars"></div>
-  <button id="mute" aria-label="mute">🔊</button>
-  <div id="tapL"></div><div id="tapR"></div>
-<!-- SLIDES -->
+  <div id="stage">
+    <div id="bars"></div>
+    <button id="mute" aria-label="mute">🔊</button>
+    <div id="tapL"></div>
+    <div id="tapR"></div>
+    <!-- SLIDES -->
 
-<!-- 0 · COVER -->
-<section class="slide active" data-dur="0" data-track="0" style="background:linear-gradient(160deg,#4a00b0,#7b2ff7 45%,#f107a3);text-align:center;align-items:center">
-  <div class="blob" style="width:280px;height:280px;background:#ff8ae2;top:-60px;left:-80px"></div>
-  <div class="blob" style="width:240px;height:240px;background:#4dd0ff;bottom:-40px;right:-70px;animation-delay:2s"></div>
-  <div class="hearts-holder"></div>
-  <div class="kicker" style="color:#ffd6f6">02.08.2025 — 02.08.2026</div>
-  <h1 class="big" style="font-size:clamp(33px,10.5vw,42px);margin-top:14px">SHIRATH<br>&amp; FIRDA</h1>
-  <div class="chip delay1" style="margin-top:18px;background:#fff;color:#7b2ff7;opacity:0;animation:rise .6s .5s forwards">YEAR ONE · WRAPPED</div>
-  <p class="sub delay3" style="margin-top:16px;color:#ffe3fa">365 hari. 110 ribu chat. Satu cerita.</p>
-  <button id="startBtn">MULAI ▶</button>
-  <p class="note delay5" style="margin-top:14px;color:#ffd6f6">🎧 pake headset biar makin syahdu</p>
-</section>
+    <!-- 0 · COVER -->
+    <section class="slide active" data-dur="0" data-track="0"
+      style="background:linear-gradient(160deg,#4a00b0,#7b2ff7 45%,#f107a3);text-align:center;align-items:center">
+      <div class="blob" style="width:280px;height:280px;background:#ff8ae2;top:-60px;left:-80px"></div>
+      <div class="blob" style="width:240px;height:240px;background:#4dd0ff;bottom:-40px;right:-70px;animation-delay:2s">
+      </div>
+      <div class="hearts-holder"></div>
+      <div class="kicker" style="color:#ffd6f6">02.08.2025 — 02.08.2026</div>
+      <h1 class="big" style="font-size:clamp(33px,10.5vw,42px);margin-top:14px">SHIRATH<br>&amp; FIRDA</h1>
+      <div class="chip delay1"
+        style="margin-top:18px;background:#fff;color:#7b2ff7;opacity:0;animation:rise .6s .5s forwards">YEAR ONE ·
+        WRAPPED</div>
+      <p class="sub delay3" style="margin-top:16px;color:#ffe3fa">365 hari. 110 ribu chat. Satu cerita.</p>
+      <button id="startBtn">MULAI ▶</button>
+      <p class="note delay5" style="margin-top:14px;color:#ffd6f6">🎧 pake headset biar makin syahdu</p>
+    </section>
 
-<!-- 1 · 365 DAYS -->
-<section class="slide" data-dur="17000" data-track="0" style="background:linear-gradient(170deg,#ff512f,#f9a825 60%,#ffd166);text-align:center;align-items:center">
-  <div class="sun"></div>
-  <div class="kicker" style="color:#7a1f00">hari bersama</div>
-  <h1 class="big num" style="font-size:clamp(76px,26vw,110px);margin:8px 0" data-count="365">0</h1>
-  <p class="sub delay1" style="color:#5c1a00;max-width:320px">hari jadi pacarnya kamu 🫶</p>
-  <p class="sub delay3" style="margin-top:20px;background:rgba(255,255,255,.35);padding:12px 18px;border-radius:16px;color:#5c1a00;max-width:340px">
-    Dan sejak chat pertama kita sampai hari ini…<br>kita ngobrol <b>SETIAP HARI</b>.<br><b>NOL hari bolos. Streak sempurna. 🔥</b>
-  </p>
-</section>
+    <!-- 1 · 365 DAYS -->
+    <section class="slide" data-dur="17000" data-track="0"
+      style="background:linear-gradient(170deg,#ff512f,#f9a825 60%,#ffd166);text-align:center;align-items:center">
+      <div class="sun"></div>
+      <div class="kicker" style="color:#7a1f00">hari bersama</div>
+      <h1 class="big num" style="font-size:clamp(76px,26vw,110px);margin:8px 0" data-count="365">0</h1>
+      <p class="sub delay1" style="color:#5c1a00;max-width:320px">hari jadi pacarnya kamu 🫶</p>
+      <p class="sub delay3"
+        style="margin-top:20px;background:rgba(255,255,255,.35);padding:12px 18px;border-radius:16px;color:#5c1a00;max-width:340px">
+        Dan sejak chat pertama kita sampai hari ini…<br>kita ngobrol <b>SETIAP HARI</b>.<br><b>NOL hari bolos. Streak
+          sempurna. 🔥</b>
+      </p>
+    </section>
 
-<!-- 2 · MESSAGES -->
-<section class="slide" data-dur="17000" data-track="1" style="background:linear-gradient(165deg,#0f2027,#2c5364 55%,#00c9a7)">
-  <div class="blob" style="width:260px;height:260px;background:#00ffc8;top:-70px;right:-80px"></div>
-  <div class="floaty-holder" data-emo="💬"></div>
-  <div class="kicker" style="color:#8affe0">total chat setahun</div>
-  <h1 class="big num" style="font-size:clamp(42px,14.5vw,64px);margin:10px 0" data-count="110315">0</h1>
-  <p class="sub delay1" style="color:#c8fff1">pesan. Seratus sepuluh ribu. Bacanya aja seminggu 😭</p>
-  <div class="vs">
-    <div class="vsrow delay2"><div class="lbl"><span>Shirath</span><span class="num" data-count="57348">0</span></div><div class="meter"><i data-w="100" style="background:linear-gradient(90deg,#00c9a7,#8affe0)"></i></div></div>
-    <div class="vsrow delay3"><div class="lbl"><span>Firda</span><span class="num" data-count="52967">0</span></div><div class="meter"><i data-w="92" style="background:linear-gradient(90deg,#f9d423,#ff4e50)"></i></div></div>
+    <!-- 2 · MESSAGES -->
+    <section class="slide" data-dur="17000" data-track="1"
+      style="background:linear-gradient(165deg,#0f2027,#2c5364 55%,#00c9a7)">
+      <div class="blob" style="width:260px;height:260px;background:#00ffc8;top:-70px;right:-80px"></div>
+      <div class="floaty-holder" data-emo="💬"></div>
+      <div class="kicker" style="color:#8affe0">total chat setahun</div>
+      <h1 class="big num" style="font-size:clamp(42px,14.5vw,64px);margin:10px 0" data-count="110315">0</h1>
+      <p class="sub delay1" style="color:#c8fff1">pesan. Seratus sepuluh ribu. Bacanya aja seminggu 😭</p>
+      <div class="vs">
+        <div class="vsrow delay2">
+          <div class="lbl"><span>Shirath</span><span class="num" data-count="57348">0</span></div>
+          <div class="meter"><i data-w="100" style="background:linear-gradient(90deg,#00c9a7,#8affe0)"></i></div>
+        </div>
+        <div class="vsrow delay3">
+          <div class="lbl"><span>Firda</span><span class="num" data-count="52967">0</span></div>
+          <div class="meter"><i data-w="92" style="background:linear-gradient(90deg,#f9d423,#ff4e50)"></i></div>
+        </div>
+      </div>
+      <p class="note delay4" style="margin-top:18px;color:#8affe0">fun fact: kita udah chattingan 13 hari sebelum resmi
+        jadian 👀</p>
+    </section>
+
+    <!-- 3 · MOWNING -->
+    <section class="slide" data-dur="17000" data-track="2"
+      style="background:linear-gradient(170deg,#ffecd2,#fcb69f 70%,#ff9a8b);color:#5c2a00;text-align:center;align-items:center">
+      <div class="sun" style="opacity:.65"></div>
+      <div class="kicker" style="color:#a34700">ritual pagi kita</div>
+      <h1 class="big" style="font-size:clamp(33px,10.5vw,46px);margin:10px 0;color:#5c2a00">“mowning<br>bebee” ☀️</h1>
+      <p class="sub delay1" style="color:#7a3b00;max-width:330px"><b class="num" data-count="380">0</b> ucapan selamat
+        pagi dalam setahun —<br><b class="num" data-count="244">0</b> versi <i>“mowning”</i>, dan cuma <b>8</b> yang
+        nulis “good morning” dengan bener 💀</p>
+      <div class="reveal show" style="margin-top:22px;width:100%;max-width:340px;opacity:1;transform:none">
+        <div class="bubble" style="text-align:left">
+          <div class="who">Firda · 5 Des 2025, 04.26</div>Mowning sayangku, im redi tu gowwwwww
+        </div>
+      </div>
+      <p class="note delay4" style="margin-top:16px;color:#a34700">↑ mowning pertama dalam sejarah. Sejak itu, gabisa
+        balik lagi ke "good morning" biasa.</p>
+    </section>
+
+    <!-- 4 · QUIZ: I LOVE U -->
+    <section class="slide" data-dur="0" data-track="3" data-quiz
+      style="background:linear-gradient(160deg,#c31432,#ff416c 60%,#ff7b9c)">
+      <div class="blob" style="width:240px;height:240px;background:#ffd3e0;top:-60px;left:-60px"></div>
+      <div class="kicker" style="color:#ffd3e0">QUIZ TIME 💘</div>
+      <h1 class="big" style="font-size:clamp(23px,7.4vw,30px);margin:12px 0">Siapa yang bilang<br>“I love u” duluan?
+      </h1>
+      <div class="qopts">
+        <button class="qopt delay1" data-a="0">😎 Shirath lah, gentle</button>
+        <button class="qopt delay2" data-a="1">🙋‍♀️ Firda, gasabar</button>
+        <button class="qopt delay3" data-a="0">🤝 Barengan, romantis</button>
+      </div>
+      <div class="reveal">
+        <div class="bubble">
+          <div class="who">Firda · 23 Jul 2025, 00.25</div>Udh boleh ngomong i love you blm sih?
+        </div>
+        <div class="bubble me" style="margin-top:8px">
+          <div class="who">Shirath · 01.10</div>Love u too
+        </div>
+        <p class="note" style="opacity:1;animation:none;margin-top:12px;color:#ffd3e0">Firda duluan — <b>10 hari sebelum
+            jadian</b> 😭 Total setahun: 284× — dan skornya <b>142 : 142</b>. Seri. Sempurna. ⚖️💘</p>
+      </div>
+    </section>
+
+    <!-- 5 · SAYANG VS BEBE -->
+    <section class="slide" data-dur="17000" data-track="4"
+      style="background:linear-gradient(160deg,#41295a,#7b2ff7 55%,#2f80ed)">
+      <div class="blob" style="width:250px;height:250px;background:#b388ff;bottom:-60px;left:-70px"></div>
+      <div class="kicker" style="color:#d0b3ff">battle panggilan sayang</div>
+      <h1 class="big" style="font-size:clamp(25px,8vw,34px);margin:10px 0">“sayaang” 🆚 “bebe”</h1>
+      <div class="vs">
+        <div class="vsrow delay1">
+          <div class="lbl"><span>💜 sayang / sayaang</span><span class="num" data-count="4452">0</span></div>
+          <div class="meter"><i data-w="100" style="background:linear-gradient(90deg,#b388ff,#f107a3)"></i></div>
+        </div>
+        <div class="vsrow delay2">
+          <div class="lbl"><span>🩵 bebe / beb</span><span class="num" data-count="3827">0</span></div>
+          <div class="meter"><i data-w="86" style="background:linear-gradient(90deg,#4dd0ff,#00c9a7)"></i></div>
+        </div>
+      </div>
+      <p class="sub delay3"
+        style="margin-top:22px;background:rgba(255,255,255,.12);padding:14px 16px;border-radius:16px">
+        “sayang” menang! 🏆<br>Tapi juara sebenarnya: <b>Firda</b> —<br>sayang <b>2.922×</b> (vs 1.530) &nbsp;·&nbsp;
+        bebe <b>2.778×</b> (vs 1.049)
+      </p>
+      <p class="note delay4" style="margin-top:14px;color:#d0b3ff">dia keliatan jutek tapi datanya gak bisa bohong 📊💜
+      </p>
+    </section>
+
+    <!-- 6 · SEMANGAT -->
+    <section class="slide" data-dur="17000" data-track="5"
+      style="background:linear-gradient(165deg,#f7971e,#ffd200 65%,#fff176);color:#4a2c00">
+      <div class="floaty-holder" data-emo="📣"></div>
+      <div class="kicker" style="color:#8a5300">tim hore pribadi</div>
+      <h1 class="big" style="font-size:clamp(28px,9vw,40px);margin:10px 0;color:#4a2c00">SEMANGAT!!! 📣</h1>
+      <p class="sub delay1" style="color:#6b4300">Saling nyemangatin <b class="num" data-count="671">0</b> kali dalam
+        setahun — termasuk semua “semangaatt”, “smangattt”, dan “SEMANGATT KERJANYAA!!” 😤</p>
+      <div class="vs">
+        <div class="vsrow delay2">
+          <div class="lbl" style="color:#4a2c00"><span>Firda nyemangatin</span><span><span class="num"
+                data-count="339">0</span>×</span></div>
+          <div class="meter" style="background:rgba(0,0,0,.15)"><i data-w="100" style="background:#e65100"></i></div>
+        </div>
+        <div class="vsrow delay3">
+          <div class="lbl" style="color:#4a2c00"><span>Shirath nyemangatin</span><span><span class="num"
+                data-count="332">0</span>×</span></div>
+          <div class="meter" style="background:rgba(0,0,0,.15)"><i data-w="98" style="background:#7b2ff7"></i></div>
+        </div>
+      </div>
+      <p class="note delay4" style="margin-top:18px;color:#8a5300">Beda 7 doang — foto finish 📸 Firda juara cheerleader
+        tahun ini 🏆</p>
+    </section>
+
+    <!-- 7 · WKWK -->
+    <section class="slide" data-dur="17000" data-track="6"
+      style="background:linear-gradient(160deg,#11998e,#38ef7d);color:#053b2c;text-align:center;align-items:center">
+      <div class="floaty-holder" data-emo="😭"></div>
+      <div class="kicker" style="color:#04553e">dokter bilang ketawa itu sehat</div>
+      <h1 class="big" style="font-size:clamp(30px,10vw,46px);margin:12px 0;color:#053b2c"><span class="wk">W</span><span
+          class="wk" style="animation-delay:.1s">K</span><span class="wk" style="animation-delay:.2s">W</span><span
+          class="wk" style="animation-delay:.3s">K</span><span class="wk" style="animation-delay:.4s">W</span><span
+          class="wk" style="animation-delay:.5s">K</span></h1>
+      <p class="sub delay1" style="color:#04553e"><b class="num" data-count="10310">0</b> kali ketawa bareng lewat chat
+        😂</p>
+      <p class="sub delay3"
+        style="margin-top:18px;background:rgba(255,255,255,.4);padding:14px 18px;border-radius:16px;color:#053b2c;max-width:340px">
+        Emoji favorit kita berdua? Sama persis:<br><span style="font-size:40px">😭</span><br><b class="num"
+          data-count="4922">0</b>× — nangis tapi bahagia
+      </p>
+      <p class="note delay4" style="color:#04553e">runner up: 💗 (Shirath) &nbsp;·&nbsp; 🩷🫶😙 (Firda)</p>
+    </section>
+
+    <!-- 8 · QUIZ: RECORD DAY -->
+    <section class="slide" data-dur="0" data-track="7" data-quiz
+      style="background:linear-gradient(160deg,#ff6a00,#ee0979)">
+      <div class="blob" style="width:240px;height:240px;background:#ffc371;bottom:-70px;right:-60px"></div>
+      <div class="kicker" style="color:#ffdcc7">QUIZ TIME 🔥</div>
+      <h1 class="big" style="font-size:clamp(21px,6.8vw,28px);margin:12px 0">Rekor kita: berapa chat terbanyak dalam
+        SATU hari?</h1>
+      <div class="qopts">
+        <button class="qopt delay1" data-a="0">± 500 pesan</button>
+        <button class="qopt delay2" data-a="0">± 900 pesan</button>
+        <button class="qopt delay3" data-a="1">1.611 pesan 💀</button>
+      </div>
+      <div class="reveal">
+        <p class="sub" style="opacity:1;animation:none;background:rgba(0,0,0,.25);padding:14px 16px;border-radius:16px">
+          <b>27 Juli 2025</b> — 1.611 pesan dalam sehari.<br>Itu baru <b>seminggu</b> setelah kenalan 😳<br>Semenempel
+          itu dari awal.
+        </p>
+        <p class="note" style="opacity:1;animation:none;margin-top:10px;color:#ffdcc7">bonus: 4.388 chat kita terkirim
+          jam 12 malem – 4 pagi 🌙</p>
+      </div>
+    </section>
+
+    <!-- 9 · CALLS -->
+    <section class="slide" data-dur="17000" data-track="8"
+      style="background:linear-gradient(165deg,#141e30,#243b55 60%,#5561a5);text-align:center;align-items:center">
+      <div class="blob" style="width:240px;height:240px;background:#7f9cf5;top:-60px;left:-60px"></div>
+      <div class="kicker" style="color:#aab8ff">nelfon terooos</div>
+      <div class="rings"><span class="r"></span><span class="r"></span><span class="r"></span><span
+          class="core">📞</span></div>
+      <h1 class="big num" style="font-size:clamp(56px,19vw,78px)" data-count="845">0</h1>
+      <p class="sub delay1" style="color:#ccd6ff">kali telfonan & video call</p>
+      <p class="sub delay3"
+        style="margin-top:20px;background:rgba(255,255,255,.1);padding:14px 18px;border-radius:16px;max-width:340px;color:#e2e8ff">
+        Total <b class="num" data-count="566">0</b> jam ngobrol =<br><b>24 hari nonstop</b> denger suara masing-masing
+        🎧
+      </p>
+      <p class="note delay4" style="color:#aab8ff">plus 733 voice note & 10.566 foto saling dikirim 📸</p>
+    </section>
+
+    <!-- 10 · ROUGH DAYS -->
+    <section class="slide" data-dur="17000" data-track="9"
+      style="background:linear-gradient(170deg,#3a1c71,#d76d77 70%,#ffaf7b)">
+      <div class="kicker" style="color:#ffd9c9">gak selalu cerah, tapi…</div>
+      <h1 class="big" style="font-size:clamp(25px,8vw,34px);margin:12px 0">± <span class="num" data-count="26">0</span>
+        hari<br>kita sempet berantem 🌧️</h1>
+      <p class="sub delay2" style="color:#ffe6db">Dari setahun penuh. Artinya 330+ hari lainnya? Cerah ☀️</p>
+      <div class="vs">
+        <div class="vsrow delay3">
+          <div class="lbl"><span>🙏 “sorry / maaf” — Shirath</span><span><span class="num"
+                data-count="293">0</span>×</span></div>
+          <div class="meter"><i data-w="100" style="background:#ffaf7b"></i></div>
+        </div>
+        <div class="vsrow delay4">
+          <div class="lbl"><span>🙏 “sorry / maaf” — Firda</span><span><span class="num"
+                data-count="218">0</span>×</span></div>
+          <div class="meter"><i data-w="74" style="background:#ff7b9c"></i></div>
+        </div>
+      </div>
+      <p class="sub delay5"
+        style="margin-top:22px;background:rgba(255,255,255,.13);padding:15px 17px;border-radius:16px">
+        Tapi ini yang paling penting:<br>semarah apapun, <b>gak pernah ada satu hari pun kita saling diem</b>. Nol hari
+        silent treatment. 🤍
+      </p>
+    </section>
+
+    <!-- 11 · NICKNAMES -->
+    <section class="slide" data-dur="17000" data-track="10"
+      style="background:linear-gradient(160deg,#fdf0e6,#ffd9e8 60%,#ffb7d5);color:#5c1035">
+      <div class="floaty-holder" data-emo="💗"></div>
+      <div class="kicker" style="color:#a3255f">nama asli? gak kenal</div>
+      <h1 class="big" style="font-size:clamp(24px,7.8vw,32px);margin:10px 0;color:#5c1035">Panggilan<br>sepanjang tahun
+        🏷️</h1>
+      <div class="grid" style="grid-template-columns:1fr">
+        <div class="cell delay1" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b
+            style="color:#c2185b">“shii” — 457×</b><span style="color:#7a1f47">panggilan Firda buat Shirath</span></div>
+        <div class="cell delay2" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b
+            style="color:#7b2ff7">“cantik” — 315×</b><span style="color:#7a1f47">kata Shirath ke Firda (bener
+            sih)</span></div>
+        <div class="cell delay3" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b
+            style="color:#e65100">“ganteng / gamtenk” — 395×</b><span style="color:#7a1f47">kata Firda — dia lebih rajin
+            muji 😌</span></div>
+      </div>
+      <p class="sub delay4" style="margin-top:18px;color:#7a1f47">Dan pas lagi jauh: “kangen” terucap <b>130×</b> —
+        Firda 94, Shirath 36. Yang keliatan cool belum tentu gak kangen 😏</p>
+    </section>
+
+    <!-- 12 · FINALE -->
+    <section id="finale" class="slide" data-dur="0" data-track="11"
+      style="background:linear-gradient(160deg,#4a00b0,#7b2ff7 40%,#f107a3 80%,#ff8ae2);text-align:center;align-items:center">
+      <canvas id="confetti"></canvas>
+      <div class="kicker" style="color:#ffd6f6">the wrap · 02.08.2026</div>
+      <h1 class="big" style="font-size:clamp(24px,7.6vw,30px);margin:8px 0">SATU TAHUN<br>KITA 💗</h1>
+      <div class="grid" style="width:100%">
+        <div class="cell delay1"><b>365</b><span>hari bersama</span></div>
+        <div class="cell delay1"><b>110.315</b><span>pesan</span></div>
+        <div class="cell delay2"><b>0</b><span>hari tanpa kabar</span></div>
+        <div class="cell delay2"><b>380</b><span>good mowning ☀️</span></div>
+        <div class="cell delay3"><b>8.279</b><span>sayaang + bebe 💜</span></div>
+        <div class="cell delay3"><b>671</b><span>semangat!! 📣</span></div>
+        <div class="cell delay4"><b>10.310</b><span>wkwkwk 😂</span></div>
+        <div class="cell delay4"><b>566 jam</b><span>telfonan 📞</span></div>
+        <div class="cell delay5"><b>±26</b><span>hari berantem 🌧️</span></div>
+        <div class="cell delay5"><b>511</b><span>sorry & maaf 🙏</span></div>
+        <div class="cell delay5"><b>284</b><span>i love u · 142:142 💌</span></div>
+        <div class="cell delay5"><b>∞</b><span>tahun berikutnya</span></div>
+      </div>
+      <p class="sub" style="margin-top:14px;color:#ffe3fa;animation-delay:1.7s;font-size:14px">Makasih udah jadi rumah
+        paling rame,<br>paling hangat, setahun ini.<br><b>Happy anniversary, sayaang. I love u.</b> 🫶</p>
+      <button id="replayBtn" onclick="location.reload()">↺ PUTAR LAGI</button>
+    </section>
+
   </div>
-  <p class="note delay4" style="margin-top:18px;color:#8affe0">fun fact: kita udah chattingan 13 hari sebelum resmi jadian 👀</p>
-</section>
+  <audio id="player" preload="auto" loop></audio>
+  <script>
+    /* ================= CONFIG ================= */
+    // songs/slide-1.mp3 ... songs/slide-12.mp3
+    // slide-1 = cover + "365 hari" (music can only start at the MULAI tap — browser autoplay rule)
+    const TRACKS = Array.from({ length: 12 }, (_, i) => 'songs/slide-' + (i + 1) + '.mp3');
 
-<!-- 3 · MOWNING -->
-<section class="slide" data-dur="17000" data-track="2" style="background:linear-gradient(170deg,#ffecd2,#fcb69f 70%,#ff9a8b);color:#5c2a00;text-align:center;align-items:center">
-  <div class="sun" style="opacity:.65"></div>
-  <div class="kicker" style="color:#a34700">ritual pagi kita</div>
-  <h1 class="big" style="font-size:clamp(33px,10.5vw,46px);margin:10px 0;color:#5c2a00">“mowning<br>bebee” ☀️</h1>
-  <p class="sub delay1" style="color:#7a3b00;max-width:330px"><b class="num" data-count="380">0</b> ucapan selamat pagi dalam setahun —<br><b class="num" data-count="244">0</b> versi <i>“mowning”</i>, dan cuma <b>8</b> yang nulis “good morning” dengan bener 💀</p>
-  <div class="reveal show" style="margin-top:22px;width:100%;max-width:340px;opacity:1;transform:none">
-    <div class="bubble" style="text-align:left"><div class="who">Firda · 5 Des 2025, 04.26</div>Mowning sayangku, im redi tu gowwwwww</div>
-  </div>
-  <p class="note delay4" style="margin-top:16px;color:#a34700">↑ mowning pertama dalam sejarah. Sejak itu, gabisa balik lagi ke "good morning" biasa.</p>
-</section>
+    const slides = [...document.querySelectorAll('.slide')];
+    const barsEl = document.getElementById('bars');
+    const player = document.getElementById('player');
+    const muteBtn = document.getElementById('mute');
+    let idx = 0, timer = null, tStart = 0, tLeft = 0, paused = false, started = false, muted = false, curTrack = -1;
 
-<!-- 4 · QUIZ: I LOVE U -->
-<section class="slide" data-dur="0" data-track="3" data-quiz style="background:linear-gradient(160deg,#c31432,#ff416c 60%,#ff7b9c)">
-  <div class="blob" style="width:240px;height:240px;background:#ffd3e0;top:-60px;left:-60px"></div>
-  <div class="kicker" style="color:#ffd3e0">QUIZ TIME 💘</div>
-  <h1 class="big" style="font-size:clamp(23px,7.4vw,30px);margin:12px 0">Siapa yang bilang<br>“I love u” duluan?</h1>
-  <div class="qopts">
-    <button class="qopt delay1" data-a="0">😎 Shirath lah, gentle</button>
-    <button class="qopt delay2" data-a="1">🙋‍♀️ Firda, gasabar</button>
-    <button class="qopt delay3" data-a="0">🤝 Barengan, romantis</button>
-  </div>
-  <div class="reveal">
-    <div class="bubble"><div class="who">Firda · 23 Jul 2025, 00.25</div>Udh boleh ngomong i love you blm sih?</div>
-    <div class="bubble me" style="margin-top:8px"><div class="who">Shirath · 01.10</div>Love u too</div>
-    <p class="note" style="opacity:1;animation:none;margin-top:12px;color:#ffd3e0">Firda duluan — <b>10 hari sebelum jadian</b> 😭 Total setahun: 284× — dan skornya <b>142 : 142</b>. Seri. Sempurna. ⚖️💘</p>
-  </div>
-</section>
+    /* progress bars (skip cover) */
+    slides.slice(1).forEach(() => {
+      const b = document.createElement('div'); b.className = 'bar'; b.innerHTML = '<i></i>';
+      barsEl.appendChild(b);
+    });
+    const bars = [...barsEl.querySelectorAll('.bar i')];
 
-<!-- 5 · SAYANG VS BEBE -->
-<section class="slide" data-dur="17000" data-track="4" style="background:linear-gradient(160deg,#41295a,#7b2ff7 55%,#2f80ed)">
-  <div class="blob" style="width:250px;height:250px;background:#b388ff;bottom:-60px;left:-70px"></div>
-  <div class="kicker" style="color:#d0b3ff">battle panggilan sayang</div>
-  <h1 class="big" style="font-size:clamp(25px,8vw,34px);margin:10px 0">“sayaang” 🆚 “bebe”</h1>
-  <div class="vs">
-    <div class="vsrow delay1"><div class="lbl"><span>💜 sayang / sayaang</span><span class="num" data-count="4452">0</span></div><div class="meter"><i data-w="100" style="background:linear-gradient(90deg,#b388ff,#f107a3)"></i></div></div>
-    <div class="vsrow delay2"><div class="lbl"><span>🩵 bebe / beb</span><span class="num" data-count="3827">0</span></div><div class="meter"><i data-w="86" style="background:linear-gradient(90deg,#4dd0ff,#00c9a7)"></i></div></div>
-  </div>
-  <p class="sub delay3" style="margin-top:22px;background:rgba(255,255,255,.12);padding:14px 16px;border-radius:16px">
-    “sayang” menang! 🏆<br>Tapi juara sebenarnya: <b>Firda</b> —<br>sayang <b>2.922×</b> (vs 1.530) &nbsp;·&nbsp; bebe <b>2.778×</b> (vs 1.049)
-  </p>
-  <p class="note delay4" style="margin-top:14px;color:#d0b3ff">dia keliatan jutek tapi datanya gak bisa bohong 📊💜</p>
-</section>
-
-<!-- 6 · SEMANGAT -->
-<section class="slide" data-dur="17000" data-track="5" style="background:linear-gradient(165deg,#f7971e,#ffd200 65%,#fff176);color:#4a2c00">
-  <div class="floaty-holder" data-emo="📣"></div>
-  <div class="kicker" style="color:#8a5300">tim hore pribadi</div>
-  <h1 class="big" style="font-size:clamp(28px,9vw,40px);margin:10px 0;color:#4a2c00">SEMANGAT!!! 📣</h1>
-  <p class="sub delay1" style="color:#6b4300">Saling nyemangatin <b class="num" data-count="671">0</b> kali dalam setahun — termasuk semua “semangaatt”, “smangattt”, dan “SEMANGATT KERJANYAA!!” 😤</p>
-  <div class="vs">
-    <div class="vsrow delay2"><div class="lbl" style="color:#4a2c00"><span>Firda nyemangatin</span><span><span class="num" data-count="339">0</span>×</span></div><div class="meter" style="background:rgba(0,0,0,.15)"><i data-w="100" style="background:#e65100"></i></div></div>
-    <div class="vsrow delay3"><div class="lbl" style="color:#4a2c00"><span>Shirath nyemangatin</span><span><span class="num" data-count="332">0</span>×</span></div><div class="meter" style="background:rgba(0,0,0,.15)"><i data-w="98" style="background:#7b2ff7"></i></div></div>
-  </div>
-  <p class="note delay4" style="margin-top:18px;color:#8a5300">Beda 7 doang — foto finish 📸 Firda juara cheerleader tahun ini 🏆</p>
-</section>
-
-<!-- 7 · WKWK -->
-<section class="slide" data-dur="17000" data-track="6" style="background:linear-gradient(160deg,#11998e,#38ef7d);color:#053b2c;text-align:center;align-items:center">
-  <div class="floaty-holder" data-emo="😭"></div>
-  <div class="kicker" style="color:#04553e">dokter bilang ketawa itu sehat</div>
-  <h1 class="big" style="font-size:clamp(30px,10vw,46px);margin:12px 0;color:#053b2c"><span class="wk">W</span><span class="wk" style="animation-delay:.1s">K</span><span class="wk" style="animation-delay:.2s">W</span><span class="wk" style="animation-delay:.3s">K</span><span class="wk" style="animation-delay:.4s">W</span><span class="wk" style="animation-delay:.5s">K</span></h1>
-  <p class="sub delay1" style="color:#04553e"><b class="num" data-count="10310">0</b> kali ketawa bareng lewat chat 😂</p>
-  <p class="sub delay3" style="margin-top:18px;background:rgba(255,255,255,.4);padding:14px 18px;border-radius:16px;color:#053b2c;max-width:340px">
-    Emoji favorit kita berdua? Sama persis:<br><span style="font-size:40px">😭</span><br><b class="num" data-count="4922">0</b>× — nangis tapi bahagia
-  </p>
-  <p class="note delay4" style="color:#04553e">runner up: 💗 (Shirath) &nbsp;·&nbsp; 🩷🫶😙 (Firda)</p>
-</section>
-
-<!-- 8 · QUIZ: RECORD DAY -->
-<section class="slide" data-dur="0" data-track="7" data-quiz style="background:linear-gradient(160deg,#ff6a00,#ee0979)">
-  <div class="blob" style="width:240px;height:240px;background:#ffc371;bottom:-70px;right:-60px"></div>
-  <div class="kicker" style="color:#ffdcc7">QUIZ TIME 🔥</div>
-  <h1 class="big" style="font-size:clamp(21px,6.8vw,28px);margin:12px 0">Rekor kita: berapa chat terbanyak dalam SATU hari?</h1>
-  <div class="qopts">
-    <button class="qopt delay1" data-a="0">± 500 pesan</button>
-    <button class="qopt delay2" data-a="0">± 900 pesan</button>
-    <button class="qopt delay3" data-a="1">1.611 pesan 💀</button>
-  </div>
-  <div class="reveal">
-    <p class="sub" style="opacity:1;animation:none;background:rgba(0,0,0,.25);padding:14px 16px;border-radius:16px">
-      <b>27 Juli 2025</b> — 1.611 pesan dalam sehari.<br>Itu baru <b>seminggu</b> setelah kenalan 😳<br>Semenempel itu dari awal.
-    </p>
-    <p class="note" style="opacity:1;animation:none;margin-top:10px;color:#ffdcc7">bonus: 4.388 chat kita terkirim jam 12 malem – 4 pagi 🌙</p>
-  </div>
-</section>
-
-<!-- 9 · CALLS -->
-<section class="slide" data-dur="17000" data-track="8" style="background:linear-gradient(165deg,#141e30,#243b55 60%,#5561a5);text-align:center;align-items:center">
-  <div class="blob" style="width:240px;height:240px;background:#7f9cf5;top:-60px;left:-60px"></div>
-  <div class="kicker" style="color:#aab8ff">nelfon terooos</div>
-  <div class="rings"><span class="r"></span><span class="r"></span><span class="r"></span><span class="core">📞</span></div>
-  <h1 class="big num" style="font-size:clamp(56px,19vw,78px)" data-count="845">0</h1>
-  <p class="sub delay1" style="color:#ccd6ff">kali telfonan & video call</p>
-  <p class="sub delay3" style="margin-top:20px;background:rgba(255,255,255,.1);padding:14px 18px;border-radius:16px;max-width:340px;color:#e2e8ff">
-    Total <b class="num" data-count="566">0</b> jam ngobrol =<br><b>24 hari nonstop</b> denger suara masing-masing 🎧
-  </p>
-  <p class="note delay4" style="color:#aab8ff">plus 733 voice note & 10.566 foto saling dikirim 📸</p>
-</section>
-
-<!-- 10 · ROUGH DAYS -->
-<section class="slide" data-dur="17000" data-track="9" style="background:linear-gradient(170deg,#3a1c71,#d76d77 70%,#ffaf7b)">
-  <div class="kicker" style="color:#ffd9c9">gak selalu cerah, tapi…</div>
-  <h1 class="big" style="font-size:clamp(25px,8vw,34px);margin:12px 0">± <span class="num" data-count="26">0</span> hari<br>kita sempet berantem 🌧️</h1>
-  <p class="sub delay2" style="color:#ffe6db">Dari setahun penuh. Artinya 330+ hari lainnya? Cerah ☀️</p>
-  <div class="vs">
-    <div class="vsrow delay3"><div class="lbl"><span>🙏 “sorry / maaf” — Shirath</span><span><span class="num" data-count="293">0</span>×</span></div><div class="meter"><i data-w="100" style="background:#ffaf7b"></i></div></div>
-    <div class="vsrow delay4"><div class="lbl"><span>🙏 “sorry / maaf” — Firda</span><span><span class="num" data-count="218">0</span>×</span></div><div class="meter"><i data-w="74" style="background:#ff7b9c"></i></div></div>
-  </div>
-  <p class="sub delay5" style="margin-top:22px;background:rgba(255,255,255,.13);padding:15px 17px;border-radius:16px">
-    Tapi ini yang paling penting:<br>semarah apapun, <b>gak pernah ada satu hari pun kita saling diem</b>. Nol hari silent treatment. 🤍
-  </p>
-</section>
-
-<!-- 11 · NICKNAMES -->
-<section class="slide" data-dur="17000" data-track="10" style="background:linear-gradient(160deg,#fdf0e6,#ffd9e8 60%,#ffb7d5);color:#5c1035">
-  <div class="floaty-holder" data-emo="💗"></div>
-  <div class="kicker" style="color:#a3255f">nama asli? gak kenal</div>
-  <h1 class="big" style="font-size:clamp(24px,7.8vw,32px);margin:10px 0;color:#5c1035">Panggilan<br>sepanjang tahun 🏷️</h1>
-  <div class="grid" style="grid-template-columns:1fr">
-    <div class="cell delay1" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b style="color:#c2185b">“shii” — 457×</b><span style="color:#7a1f47">panggilan Firda buat Shirath</span></div>
-    <div class="cell delay2" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b style="color:#7b2ff7">“cantik” — 315×</b><span style="color:#7a1f47">kata Shirath ke Firda (bener sih)</span></div>
-    <div class="cell delay3" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b style="color:#e65100">“ganteng / gamtenk” — 395×</b><span style="color:#7a1f47">kata Firda — dia lebih rajin muji 😌</span></div>
-  </div>
-  <p class="sub delay4" style="margin-top:18px;color:#7a1f47">Dan pas lagi jauh: “kangen” terucap <b>130×</b> — Firda 94, Shirath 36. Yang keliatan cool belum tentu gak kangen 😏</p>
-</section>
-
-<!-- 12 · FINALE -->
-<section id="finale" class="slide" data-dur="0" data-track="11" style="background:linear-gradient(160deg,#4a00b0,#7b2ff7 40%,#f107a3 80%,#ff8ae2);text-align:center;align-items:center">
-  <canvas id="confetti"></canvas>
-  <div class="kicker" style="color:#ffd6f6">the wrap · 02.08.2026</div>
-  <h1 class="big" style="font-size:clamp(24px,7.6vw,30px);margin:8px 0">SATU TAHUN<br>KITA 💜</h1>
-  <div class="grid" style="width:100%">
-    <div class="cell delay1"><b>365</b><span>hari bersama</span></div>
-    <div class="cell delay1"><b>110.315</b><span>pesan</span></div>
-    <div class="cell delay2"><b>0</b><span>hari tanpa kabar</span></div>
-    <div class="cell delay2"><b>380</b><span>good mowning ☀️</span></div>
-    <div class="cell delay3"><b>8.279</b><span>sayaang + bebe 💜</span></div>
-    <div class="cell delay3"><b>671</b><span>semangat!! 📣</span></div>
-    <div class="cell delay4"><b>10.310</b><span>wkwkwk 😂</span></div>
-    <div class="cell delay4"><b>566 jam</b><span>telfonan 📞</span></div>
-    <div class="cell delay5"><b>±26</b><span>hari berantem 🌧️</span></div>
-    <div class="cell delay5"><b>511</b><span>sorry & maaf 🙏</span></div>
-    <div class="cell delay5"><b>284</b><span>i love u · 142:142 💌</span></div>
-    <div class="cell delay5"><b>∞</b><span>tahun berikutnya</span></div>
-  </div>
-  <p class="sub" style="margin-top:14px;color:#ffe3fa;animation-delay:1.7s;font-size:14px">Makasih udah jadi rumah paling rame,<br>paling hangat, setahun ini.<br><b>Happy anniversary, sayaang. I love u.</b> 🫶</p>
-  <button id="replayBtn" onclick="location.reload()">↺ PUTAR LAGI</button>
-</section>
-
-</div>
-<audio id="player" preload="auto" loop></audio>
-<script>
-/* ================= CONFIG ================= */
-// songs/slide-1.mp3 ... songs/slide-12.mp3
-// slide-1 = cover + "365 hari" (music can only start at the MULAI tap — browser autoplay rule)
-const TRACKS = Array.from({length: 12}, (_, i) => 'songs/slide-' + (i + 1) + '.mp3');
-
-const slides = [...document.querySelectorAll('.slide')];
-const barsEl = document.getElementById('bars');
-const player = document.getElementById('player');
-const muteBtn = document.getElementById('mute');
-let idx = 0, timer = null, tStart = 0, tLeft = 0, paused = false, started = false, muted = false, curTrack = -1;
-
-/* progress bars (skip cover) */
-slides.slice(1).forEach(() => {
-  const b = document.createElement('div'); b.className = 'bar'; b.innerHTML = '<i></i>';
-  barsEl.appendChild(b);
-});
-const bars = [...barsEl.querySelectorAll('.bar i')];
-
-/* ================= AUDIO ================= */
-/* iOS ignores audio.volume — route through Web Audio so gain fades work everywhere */
-let actx = null, gainNode = null;
-function initWebAudio(){
-  try {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    actx = new AC();
-    const src = actx.createMediaElementSource(player);
-    gainNode = actx.createGain();
-    src.connect(gainNode); gainNode.connect(actx.destination);
-  } catch(e){ actx = null; gainNode = null; }  // fallback: plain volume (desktop ok)
-}
-function setVol(v){
-  if (gainNode) gainNode.gain.value = v;
-  else { try { player.volume = v; } catch(e){} }
-}
-function getVol(){ return gainNode ? gainNode.gain.value : player.volume; }
-document.addEventListener('pointerdown', () => { if (actx && actx.state === 'suspended') actx.resume(); });
-/* fetch upcoming tracks in the background so slide changes don't wait on the network */
-const preloaded = {};
-function preloadTrack(i){
-  if (i < 0 || i >= TRACKS.length || preloaded[i]) return;
-  const a = new Audio();
-  a.preload = 'auto';
-  a.src = TRACKS[i];
-  preloaded[i] = a;
-}
-let switchId = 0;
-function playTrack(i){
-  if (i === curTrack) return;
-  curTrack = i;
-  const my = ++switchId;
-  fade(0, () => {
-    if (my !== switchId) return;            // a newer switch superseded this one
-    player.src = TRACKS[i];
-    setVol(0);
-    player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
-  });
-}
-let fadeInt = null;
-function fade(target, cb){
-  clearInterval(fadeInt);
-  if (!player.src) { cb && cb(); return; }
-  let steps = 0;
-  fadeInt = setInterval(() => {
-    steps++;
-    const v = getVol() + (target > getVol() ? .09 : -.09);
-    setVol(Math.min(1, Math.max(0, v)));
-    if (Math.abs(getVol() - target) < .05 || steps > 13){  // ~0.6s fade, hard cap as safety net
-      setVol(target);
-      clearInterval(fadeInt); cb && cb();
+    /* ================= AUDIO ================= */
+    /* iOS ignores audio.volume — route through Web Audio so gain fades work everywhere */
+    let actx = null, gainNode = null;
+    function initWebAudio() {
+      try {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        actx = new AC();
+        const src = actx.createMediaElementSource(player);
+        gainNode = actx.createGain();
+        src.connect(gainNode); gainNode.connect(actx.destination);
+      } catch (e) { actx = null; gainNode = null; }  // fallback: plain volume (desktop ok)
     }
-  }, 50);
-}
-/* missing mp3 → keep the previous song playing instead of going silent */
-let lastGood = null;
-player.addEventListener('playing', () => { lastGood = player.src; });
-player.addEventListener('error', () => {
-  if (lastGood && player.src !== lastGood){
-    player.src = lastGood;
-    player.play().then(() => fade(1)).catch(() => {});
-  }
-});
-muteBtn.addEventListener('click', e => {
-  e.stopPropagation();
-  muted = !muted;
-  muteBtn.textContent = muted ? '🔇' : '🔊';
-  player.muted = muted;   // .muted works on iOS; .volume does not
-});
-
-/* ================= COUNT-UP ================= */
-function countUps(slide){
-  slide.querySelectorAll('[data-count]').forEach(el => {
-    const target = +el.dataset.count, dur = Math.min(2200, 600 + target / 40);
-    const t0 = performance.now();
-    function step(t){
-      const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * e).toLocaleString('id-ID');
-      if (p < 1 && el.isConnected) requestAnimationFrame(step);
+    function setVol(v) {
+      if (gainNode) gainNode.gain.value = v;
+      else { try { player.volume = v; } catch (e) { } }
     }
-    requestAnimationFrame(step);
-  });
-  slide.querySelectorAll('.meter i').forEach(el => {
-    el.style.width = '0%';
-    setTimeout(() => el.style.width = el.dataset.w + '%', 500);
-  });
-}
-
-/* ================= DECOR ================= */
-function decorate(slide){
-  const fh = slide.querySelector('.floaty-holder');
-  if (fh && !fh.childElementCount){
-    const emo = fh.dataset.emo;
-    for (let i = 0; i < 10; i++){
-      const s = document.createElement('span');
-      s.className = 'floaty'; s.textContent = emo;
-      s.style.left = Math.random() * 92 + '%';
-      s.style.fontSize = (16 + Math.random() * 22) + 'px';
-      s.style.animationDuration = (5 + Math.random() * 6) + 's';
-      s.style.animationDelay = (Math.random() * 6) + 's';
-      fh.appendChild(s);
+    function getVol() { return gainNode ? gainNode.gain.value : player.volume; }
+    document.addEventListener('pointerdown', () => { if (actx && actx.state === 'suspended') actx.resume(); });
+    /* download every song into memory in the background (fetch works even where iOS ignores audio preload) */
+    const BLOBS = {};
+    const fetching = {};
+    function preloadTrack(i) {
+      if (i < 0 || i >= TRACKS.length || BLOBS[i] || fetching[i]) return;
+      fetching[i] = fetch(TRACKS[i])
+        .then(r => { if (!r.ok) throw 0; return r.blob(); })
+        .then(b => { BLOBS[i] = URL.createObjectURL(b); })
+        .catch(() => { });   // missing file → will just fall back to network path / lastGood
     }
-  }
-  const hh = slide.querySelector('.hearts-holder');
-  if (hh && !hh.childElementCount){
-    const set = ['💜','💗','🩷','✨','💘'];
-    for (let i = 0; i < 14; i++){
-      const s = document.createElement('span');
-      s.className = 'heart'; s.textContent = set[i % set.length];
-      s.style.left = Math.random() * 94 + '%';
-      s.style.fontSize = (14 + Math.random() * 26) + 'px';
-      s.style.animationDuration = (6 + Math.random() * 8) + 's';
-      s.style.animationDelay = (Math.random() * 8) + 's';
-      hh.appendChild(s);
-    }
-  }
-}
-
-/* ================= NAV / TIMER ================= */
-function show(i){
-  if (i < 0 || i >= slides.length) return;
-  runId++;               // kill any running timer loop from the previous slide
-  paused = false;
-  slides[idx].classList.remove('active');
-  idx = i;
-  const s = slides[idx];
-  // restart entry animations — Safari needs an explicit animation reset, class toggling isn't enough
-  s.classList.remove('active');
-  // skip infinite/looping anims (their stagger lives in inline styles the reset would wipe)
-  const skip = ['floaty','heart','wk','blob'];
-  const animEls = [s, ...s.querySelectorAll('*')].filter(el =>
-    !skip.some(c => el.classList.contains(c)));
-  const prevAnims = animEls.map(el => el.style.animation);   // remember inline shorthands (e.g. cover chip)
-  animEls.forEach(el => el.style.animation = 'none');
-  void s.offsetWidth;
-  animEls.forEach((el, k) => el.style.animation = prevAnims[k]);
-  s.classList.add('active');
-  // reset quiz state on (re)entry
-  if (s.dataset.quiz !== undefined && !s.dataset.done){
-    s.querySelectorAll('.qopt').forEach(b => b.classList.remove('correct','wrong'));
-    s.querySelector('.reveal').classList.remove('show');
-  }
-  // bars
-  bars.forEach((b, k) => b.style.width = k < idx - 1 ? '100%' : '0%');
-  barsEl.classList.toggle('show', idx > 0);
-  muteBtn.classList.toggle('show', idx > 0);
-  countUps(s); decorate(s);
-  playTrack(+s.dataset.track);
-  // warm up the next two slides' songs
-  if (slides[idx+1]) preloadTrack(+slides[idx+1].dataset.track);
-  if (slides[idx+2]) preloadTrack(+slides[idx+2].dataset.track);
-  if (idx === slides.length - 1) confettiGo();
-  // auto-advance
-  const dur = +s.dataset.dur;
-  if (dur > 0){ runBar(dur); }
-  else if (idx > 0 && s.dataset.quiz === undefined){ /* finale: fill bar */ if(bars[idx-1]) bars[idx-1].style.width = '100%'; }
-}
-let runId = 0;
-function runBar(dur){
-  const my = ++runId;
-  const bar = bars[idx - 1];
-  let prev = performance.now(), elapsed = 0;
-  function tick(t){
-    if (my !== runId) return;           // a newer slide took over → stop this loop
-    if (!paused) elapsed += t - prev;   // clock only advances while not holding
-    prev = t;
-    const p = Math.min(1, elapsed / dur);
-    if (bar) bar.style.width = (p * 100) + '%';
-    if (p >= 1){ show(idx + 1); return; }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-/* quiz answered → show reveal, then allow tap to continue */
-document.querySelectorAll('[data-quiz]').forEach(s => {
-  s.querySelectorAll('.qopt').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      if (s.dataset.done) return;
-      s.dataset.done = '1';
-      let correctBtn = null;
-      s.querySelectorAll('.qopt').forEach(b => {
-        const ok = +b.dataset.a;
-        b.classList.add(ok ? 'correct' : 'wrong');
-        if (ok) correctBtn = b;
+    function trackSrc(i) { return BLOBS[i] || TRACKS[i]; }
+    /* start grabbing everything right away, in playback order */
+    (async () => { for (let i = 0; i < TRACKS.length; i++) { preloadTrack(i); await fetching[i]; } })();
+    let switchId = 0;
+    function playTrack(i) {
+      if (i === curTrack) return;
+      curTrack = i;
+      const my = ++switchId;
+      fade(0, () => {
+        if (my !== switchId) return;            // a newer switch superseded this one
+        player.src = trackSrc(i);
+        setVol(0);
+        player.play().then(() => fade(1)).catch(() => { }); // missing file → silent, no crash
       });
-      if (correctBtn) burst(correctBtn);
-      setTimeout(() => s.querySelector('.reveal').classList.add('show'), 550);
-      if (bars[idx-1]) bars[idx-1].style.width = '100%';
+    }
+    let fadeInt = null;
+    function fade(target, cb) {
+      clearInterval(fadeInt);
+      if (!player.src) { cb && cb(); return; }
+      let steps = 0;
+      fadeInt = setInterval(() => {
+        steps++;
+        const v = getVol() + (target > getVol() ? .09 : -.09);
+        setVol(Math.min(1, Math.max(0, v)));
+        if (Math.abs(getVol() - target) < .05 || steps > 13) {  // ~0.6s fade, hard cap as safety net
+          setVol(target);
+          clearInterval(fadeInt); cb && cb();
+        }
+      }, 50);
+    }
+    /* missing mp3 → keep the previous song playing instead of going silent */
+    let lastGood = null;
+    player.addEventListener('playing', () => { lastGood = player.src; });
+    player.addEventListener('error', () => {
+      if (lastGood && player.src !== lastGood) {
+        player.src = lastGood;
+        player.play().then(() => fade(1)).catch(() => { });
+      }
     });
-  });
-});
-
-/* one-time confetti burst from an element (quiz correct answer) */
-function burst(el){
-  if (!el.animate) return;
-  const stage = document.getElementById('stage');
-  const r = el.getBoundingClientRect(), sr = stage.getBoundingClientRect();
-  const cx = r.left - sr.left + r.width / 2, cy = r.top - sr.top + r.height / 2;
-  const cols = ['#ffd166','#ff8ae2','#4dd0ff','#b388ff','#fff','#38ef7d'];
-  for (let i = 0; i < 26; i++){
-    const p = document.createElement('span');
-    p.style.cssText = `position:absolute;left:${cx}px;top:${cy}px;width:${6+Math.random()*5}px;height:${6+Math.random()*5}px;border-radius:2px;background:${cols[i%6]};z-index:80;pointer-events:none`;
-    stage.appendChild(p);
-    const a = Math.random() * Math.PI * 2, d = 70 + Math.random() * 110;
-    p.animate(
-      [{ transform:'translate(-50%,-50%)', opacity:1 },
-       { transform:`translate(calc(-50% + ${Math.cos(a)*d}px), calc(-50% + ${Math.sin(a)*d + 50}px)) rotate(${(Math.random()*540)|0}deg)`, opacity:0 }],
-      { duration: 750 + Math.random() * 450, easing:'cubic-bezier(.2,.7,.3,1)' }
-    ).onfinish = () => p.remove();
-  }
-}
-
-/* tap zones */
-const holdDelay = 220; let holdT = null, held = false;
-function down(){ held = false; holdT = setTimeout(() => { held = true; paused = true; }, holdDelay); } // music keeps playing during hold
-function up(dir){
-  clearTimeout(holdT);
-  if (held){ held = false; paused = false; return; }
-  if (!started) return;
-  const s = slides[idx];
-  if (dir > 0 && s.dataset.quiz !== undefined && !s.dataset.done) return; // must answer quiz
-  show(idx + dir);
-}
-const L = document.getElementById('tapL'), R = document.getElementById('tapR');
-L.addEventListener('pointerdown', down); R.addEventListener('pointerdown', down);
-L.addEventListener('pointerup', () => up(-1)); R.addEventListener('pointerup', () => up(1));
-// finger dragged away / gesture cancelled → release hold cleanly, no navigation
-['pointercancel','pointerleave'].forEach(ev => [L, R].forEach(z => z.addEventListener(ev, () => {
-  clearTimeout(holdT);
-  if (held){ held = false; paused = false; }
-})));
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ') up(1);
-  if (e.key === 'ArrowLeft') up(-1);
-});
-
-/* start */
-document.getElementById('startBtn').addEventListener('click', e => {
-  e.stopPropagation();
-  started = true;
-  initWebAudio();                       // must happen inside a user gesture for iOS
-  if (actx && actx.state === 'suspended') actx.resume();
-  player.src = TRACKS[0]; curTrack = 0;
-  setVol(1);
-  player.play().catch(() => {});
-  show(1);
-});
-/* cover: unlock audio + preview track on load attempt */
-playTrackCoverInit();
-function playTrackCoverInit(){ decorate(slides[0]); }
-
-/* ================= CONFETTI ================= */
-let confettiRun = false;
-function confettiGo(){
-  if (confettiRun) return; confettiRun = true;
-  const cv = document.getElementById('confetti'); if (!cv) return;
-  const stage = document.getElementById('stage');
-  cv.width = stage.clientWidth; cv.height = stage.clientHeight;
-  const ctx = cv.getContext('2d'); if (!ctx) return;
-  const cols = ['#ffd166','#ff8ae2','#4dd0ff','#b388ff','#fff','#38ef7d'];
-  const ps = Array.from({length: 130}, () => ({
-    x: Math.random() * cv.width, y: -20 - Math.random() * cv.height,
-    w: 5 + Math.random() * 6, h: 8 + Math.random() * 8,
-    c: cols[(Math.random() * cols.length) | 0],
-    v: 1.6 + Math.random() * 2.6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .18, sway: Math.random() * 2
-  }));
-  (function loop(){
-    ctx.clearRect(0, 0, cv.width, cv.height);
-    ps.forEach(p => {
-      p.y += p.v; p.r += p.vr; p.x += Math.sin(p.y / 40) * p.sway * .6;
-      if (p.y > cv.height + 20){ p.y = -20; p.x = Math.random() * cv.width; }
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
-      ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+    muteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      muted = !muted;
+      muteBtn.textContent = muted ? '🔇' : '🔊';
+      player.muted = muted;   // .muted works on iOS; .volume does not
     });
-    if (idx === slides.length - 1) requestAnimationFrame(loop); else confettiRun = false;
-  })();
-}
-</script>
+
+    /* ================= COUNT-UP ================= */
+    function countUps(slide) {
+      slide.querySelectorAll('[data-count]').forEach(el => {
+        const target = +el.dataset.count, dur = Math.min(2200, 600 + target / 40);
+        const t0 = performance.now();
+        function step(t) {
+          const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * e).toLocaleString('id-ID');
+          if (p < 1 && el.isConnected) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+      slide.querySelectorAll('.meter i').forEach(el => {
+        el.style.width = '0%';
+        setTimeout(() => el.style.width = el.dataset.w + '%', 500);
+      });
+    }
+
+    /* ================= DECOR ================= */
+    function decorate(slide) {
+      const fh = slide.querySelector('.floaty-holder');
+      if (fh && !fh.childElementCount) {
+        const emo = fh.dataset.emo;
+        for (let i = 0; i < 10; i++) {
+          const s = document.createElement('span');
+          s.className = 'floaty'; s.textContent = emo;
+          s.style.left = Math.random() * 92 + '%';
+          s.style.fontSize = (16 + Math.random() * 22) + 'px';
+          s.style.animationDuration = (5 + Math.random() * 6) + 's';
+          s.style.animationDelay = (Math.random() * 6) + 's';
+          fh.appendChild(s);
+        }
+      }
+      const hh = slide.querySelector('.hearts-holder');
+      if (hh && !hh.childElementCount) {
+        const set = ['💜', '💗', '🩷', '✨', '💘'];
+        for (let i = 0; i < 14; i++) {
+          const s = document.createElement('span');
+          s.className = 'heart'; s.textContent = set[i % set.length];
+          s.style.left = Math.random() * 94 + '%';
+          s.style.fontSize = (14 + Math.random() * 26) + 'px';
+          s.style.animationDuration = (6 + Math.random() * 8) + 's';
+          s.style.animationDelay = (Math.random() * 8) + 's';
+          hh.appendChild(s);
+        }
+      }
+    }
+
+    /* ================= NAV / TIMER ================= */
+    function show(i) {
+      if (i < 0 || i >= slides.length) return;
+      runId++;               // kill any running timer loop from the previous slide
+      paused = false;
+      slides[idx].classList.remove('active');
+      idx = i;
+      const s = slides[idx];
+      // restart entry animations — Safari needs an explicit animation reset, class toggling isn't enough
+      s.classList.remove('active');
+      // skip infinite/looping anims (their stagger lives in inline styles the reset would wipe)
+      const skip = ['floaty', 'heart', 'wk', 'blob'];
+      const animEls = [s, ...s.querySelectorAll('*')].filter(el =>
+        !skip.some(c => el.classList.contains(c)));
+      const prevAnims = animEls.map(el => el.style.animation);   // remember inline shorthands (e.g. cover chip)
+      animEls.forEach(el => el.style.animation = 'none');
+      void s.offsetWidth;
+      animEls.forEach((el, k) => el.style.animation = prevAnims[k]);
+      s.classList.add('active');
+      // reset quiz state on (re)entry
+      if (s.dataset.quiz !== undefined && !s.dataset.done) {
+        s.querySelectorAll('.qopt').forEach(b => b.classList.remove('correct', 'wrong'));
+        s.querySelector('.reveal').classList.remove('show');
+      }
+      // bars
+      bars.forEach((b, k) => b.style.width = k < idx - 1 ? '100%' : '0%');
+      barsEl.classList.toggle('show', idx > 0);
+      muteBtn.classList.toggle('show', idx > 0);
+      countUps(s); decorate(s);
+      playTrack(+s.dataset.track);
+      // warm up the next two slides' songs
+      if (slides[idx + 1]) preloadTrack(+slides[idx + 1].dataset.track);
+      if (slides[idx + 2]) preloadTrack(+slides[idx + 2].dataset.track);
+      if (idx === slides.length - 1) confettiGo();
+      // auto-advance
+      const dur = +s.dataset.dur;
+      if (dur > 0) { runBar(dur); }
+      else if (idx > 0 && s.dataset.quiz === undefined) { /* finale: fill bar */ if (bars[idx - 1]) bars[idx - 1].style.width = '100%'; }
+    }
+    let runId = 0;
+    function runBar(dur) {
+      const my = ++runId;
+      const bar = bars[idx - 1];
+      let prev = performance.now(), elapsed = 0;
+      function tick(t) {
+        if (my !== runId) return;           // a newer slide took over → stop this loop
+        if (!paused) elapsed += t - prev;   // clock only advances while not holding
+        prev = t;
+        const p = Math.min(1, elapsed / dur);
+        if (bar) bar.style.width = (p * 100) + '%';
+        if (p >= 1) { show(idx + 1); return; }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    /* quiz answered → show reveal, then allow tap to continue */
+    document.querySelectorAll('[data-quiz]').forEach(s => {
+      s.querySelectorAll('.qopt').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          if (s.dataset.done) return;
+          s.dataset.done = '1';
+          let correctBtn = null;
+          s.querySelectorAll('.qopt').forEach(b => {
+            const ok = +b.dataset.a;
+            b.classList.add(ok ? 'correct' : 'wrong');
+            if (ok) correctBtn = b;
+          });
+          if (correctBtn) burst(correctBtn);
+          setTimeout(() => s.querySelector('.reveal').classList.add('show'), 550);
+          if (bars[idx - 1]) bars[idx - 1].style.width = '100%';
+        });
+      });
+    });
+
+    /* one-time confetti burst from an element (quiz correct answer) */
+    function burst(el) {
+      if (!el.animate) return;
+      const stage = document.getElementById('stage');
+      const r = el.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+      const cx = r.left - sr.left + r.width / 2, cy = r.top - sr.top + r.height / 2;
+      const cols = ['#ffd166', '#ff8ae2', '#4dd0ff', '#b388ff', '#fff', '#38ef7d'];
+      for (let i = 0; i < 26; i++) {
+        const p = document.createElement('span');
+        p.style.cssText = `position:absolute;left:${cx}px;top:${cy}px;width:${6 + Math.random() * 5}px;height:${6 + Math.random() * 5}px;border-radius:2px;background:${cols[i % 6]};z-index:80;pointer-events:none`;
+        stage.appendChild(p);
+        const a = Math.random() * Math.PI * 2, d = 70 + Math.random() * 110;
+        p.animate(
+          [{ transform: 'translate(-50%,-50%)', opacity: 1 },
+          { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 50}px)) rotate(${(Math.random() * 540) | 0}deg)`, opacity: 0 }],
+          { duration: 750 + Math.random() * 450, easing: 'cubic-bezier(.2,.7,.3,1)' }
+        ).onfinish = () => p.remove();
+      }
+    }
+
+    /* tap zones */
+    const holdDelay = 220; let holdT = null, held = false;
+    function down() { held = false; holdT = setTimeout(() => { held = true; paused = true; }, holdDelay); } // music keeps playing during hold
+    function up(dir) {
+      clearTimeout(holdT);
+      if (held) { held = false; paused = false; return; }
+      if (!started) return;
+      const s = slides[idx];
+      if (dir > 0 && s.dataset.quiz !== undefined && !s.dataset.done) return; // must answer quiz
+      show(idx + dir);
+    }
+    const L = document.getElementById('tapL'), R = document.getElementById('tapR');
+    L.addEventListener('pointerdown', down); R.addEventListener('pointerdown', down);
+    L.addEventListener('pointerup', () => up(-1)); R.addEventListener('pointerup', () => up(1));
+    // finger dragged away / gesture cancelled → release hold cleanly, no navigation
+    ['pointercancel', 'pointerleave'].forEach(ev => [L, R].forEach(z => z.addEventListener(ev, () => {
+      clearTimeout(holdT);
+      if (held) { held = false; paused = false; }
+    })));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') up(1);
+      if (e.key === 'ArrowLeft') up(-1);
+    });
+
+    /* start */
+    document.getElementById('startBtn').addEventListener('click', e => {
+      e.stopPropagation();
+      started = true;
+      initWebAudio();                       // must happen inside a user gesture for iOS
+      if (actx && actx.state === 'suspended') actx.resume();
+      player.src = trackSrc(0); curTrack = 0;
+      setVol(1);
+      player.play().catch(() => { });
+      show(1);
+    });
+    /* cover: unlock audio + preview track on load attempt */
+    playTrackCoverInit();
+    function playTrackCoverInit() { decorate(slides[0]); }
+
+    /* ================= CONFETTI ================= */
+    let confettiRun = false;
+    function confettiGo() {
+      if (confettiRun) return; confettiRun = true;
+      const cv = document.getElementById('confetti'); if (!cv) return;
+      const stage = document.getElementById('stage');
+      cv.width = stage.clientWidth; cv.height = stage.clientHeight;
+      const ctx = cv.getContext('2d'); if (!ctx) return;
+      const cols = ['#ffd166', '#ff8ae2', '#4dd0ff', '#b388ff', '#fff', '#38ef7d'];
+      const ps = Array.from({ length: 130 }, () => ({
+        x: Math.random() * cv.width, y: -20 - Math.random() * cv.height,
+        w: 5 + Math.random() * 6, h: 8 + Math.random() * 8,
+        c: cols[(Math.random() * cols.length) | 0],
+        v: 1.6 + Math.random() * 2.6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .18, sway: Math.random() * 2
+      }));
+      (function loop() {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        ps.forEach(p => {
+          p.y += p.v; p.r += p.vr; p.x += Math.sin(p.y / 40) * p.sway * .6;
+          if (p.y > cv.height + 20) { p.y = -20; p.x = Math.random() * cv.width; }
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+          ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+        });
+        if (idx === slides.length - 1) requestAnimationFrame(loop); else confettiRun = false;
+      })();
+    }
+  </script>
 </body>
+
 </html>
