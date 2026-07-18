@@ -344,6 +344,24 @@ slides.slice(1).forEach(() => {
 const bars = [...barsEl.querySelectorAll('.bar i')];
 
 /* ================= AUDIO ================= */
+/* iOS ignores audio.volume — route through Web Audio so gain fades work everywhere */
+let actx = null, gainNode = null;
+function initWebAudio(){
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    actx = new AC();
+    const src = actx.createMediaElementSource(player);
+    gainNode = actx.createGain();
+    src.connect(gainNode); gainNode.connect(actx.destination);
+  } catch(e){ actx = null; gainNode = null; }  // fallback: plain volume (desktop ok)
+}
+function setVol(v){
+  if (gainNode) gainNode.gain.value = v;
+  else { try { player.volume = v; } catch(e){} }
+}
+function getVol(){ return gainNode ? gainNode.gain.value : player.volume; }
+document.addEventListener('pointerdown', () => { if (actx && actx.state === 'suspended') actx.resume(); });
 /* fetch upcoming tracks in the background so slide changes don't wait on the network */
 const preloaded = {};
 function preloadTrack(i){
@@ -363,7 +381,7 @@ function playTrack(i){
     setTimeout(() => {                      // little breath so the new song enters smoothly
       if (my !== switchId) return;
       player.src = TRACKS[i];
-      try { player.volume = 0; } catch(e){}
+      setVol(0);
       player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
     }, 300);
   });
@@ -375,11 +393,10 @@ function fade(target, cb){
   let steps = 0;
   fadeInt = setInterval(() => {
     steps++;
-    const v = player.volume + (target > player.volume ? .09 : -.09);
-    try { player.volume = Math.min(1, Math.max(0, v)); } catch(e){}
-    // ~0.6s fade; force-finish even where iOS ignores volume
-    if (Math.abs(player.volume - target) < .05 || steps > 13){
-      try { player.volume = target; } catch(e){}
+    const v = getVol() + (target > getVol() ? .09 : -.09);
+    setVol(Math.min(1, Math.max(0, v)));
+    if (Math.abs(getVol() - target) < .05 || steps > 13){  // ~0.6s fade, hard cap as safety net
+      setVol(target);
       clearInterval(fadeInt); cb && cb();
     }
   }, 50);
@@ -458,11 +475,14 @@ function show(i){
   const s = slides[idx];
   // restart entry animations — Safari needs an explicit animation reset, class toggling isn't enough
   s.classList.remove('active');
+  // skip infinite/looping anims (their stagger lives in inline styles the reset would wipe)
+  const skip = ['floaty','heart','wk','blob'];
   const animEls = [s, ...s.querySelectorAll('*')].filter(el =>
-    !el.classList.contains('floaty') && !el.classList.contains('heart')); // keep particles' inline timings
+    !skip.some(c => el.classList.contains(c)));
+  const prevAnims = animEls.map(el => el.style.animation);   // remember inline shorthands (e.g. cover chip)
   animEls.forEach(el => el.style.animation = 'none');
   void s.offsetWidth;
-  animEls.forEach(el => el.style.animation = '');
+  animEls.forEach((el, k) => el.style.animation = prevAnims[k]);
   s.classList.add('active');
   // reset quiz state on (re)entry
   if (s.dataset.quiz !== undefined && !s.dataset.done){
@@ -568,8 +588,10 @@ document.addEventListener('keydown', e => {
 document.getElementById('startBtn').addEventListener('click', e => {
   e.stopPropagation();
   started = true;
+  initWebAudio();                       // must happen inside a user gesture for iOS
+  if (actx && actx.state === 'suspended') actx.resume();
   player.src = TRACKS[0]; curTrack = 0;
-  try { player.volume = 1; } catch(e){}
+  setVol(1);
   player.play().catch(() => {});
   show(1);
 });
