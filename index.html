@@ -105,6 +105,21 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 #replayBtn{margin-top:22px;padding:13px 34px;border-radius:999px;border:2px solid #fff;background:transparent;color:#fff;font-family:'Unbounded';font-weight:700;font-size:13px;opacity:0;animation:rise .6s 2s forwards;position:relative;z-index:55}
 
 #confetti{position:absolute;inset:0;pointer-events:none;z-index:10}
+/* finale fits small screens */
+#finale{padding-top:58px;padding-bottom:24px;justify-content:center}
+#finale .grid{gap:8px;margin-top:12px}
+#finale .cell{padding:9px 10px}
+#finale .cell b{font-size:16px}
+#finale .cell span{font-size:9.5px}
+@media(max-height:800px){
+  #finale .grid{gap:6px;margin-top:10px}
+  #finale .cell{padding:7px 9px;border-radius:11px}
+  #finale .cell b{font-size:14px}
+  #finale .cell span{font-size:8.5px}
+  #finale .sub{font-size:13px;margin-top:12px!important}
+  #finale #replayBtn{margin-top:12px;padding:10px 26px;font-size:12px}
+}
+
 /* slide content paints above confetti */
 .kicker,.big,.sub,.note,.grid,.vs,.qopts,.reveal,.rings,.chip{position:relative;z-index:45}
 .qopts{z-index:55}   /* quiz buttons must sit above the tap zones (50) to stay clickable */
@@ -125,7 +140,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
   <div class="blob" style="width:240px;height:240px;background:#4dd0ff;bottom:-40px;right:-70px;animation-delay:2s"></div>
   <div class="hearts-holder"></div>
   <div class="kicker" style="color:#ffd6f6">02.08.2025 — 02.08.2026</div>
-  <h1 class="big" style="font-size:42px;margin-top:14px">SHIRATH<br>&amp; FIRDA</h1>
+  <h1 class="big" style="font-size:clamp(33px,10.5vw,42px);margin-top:14px">SHIRATH<br>&amp; FIRDA</h1>
   <div class="chip delay1" style="margin-top:18px;background:#fff;color:#7b2ff7;opacity:0;animation:rise .6s .5s forwards">YEAR ONE · WRAPPED</div>
   <p class="sub delay3" style="margin-top:16px;color:#ffe3fa">365 hari. 110 ribu chat. Satu cerita.</p>
   <button id="startBtn">MULAI ▶</button>
@@ -136,7 +151,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="17000" data-track="0" style="background:linear-gradient(170deg,#ff512f,#f9a825 60%,#ffd166);text-align:center;align-items:center">
   <div class="sun"></div>
   <div class="kicker" style="color:#7a1f00">hari bersama</div>
-  <h1 class="big num" style="font-size:110px;margin:8px 0" data-count="365">0</h1>
+  <h1 class="big num" style="font-size:clamp(76px,26vw,110px);margin:8px 0" data-count="365">0</h1>
   <p class="sub delay1" style="color:#5c1a00;max-width:320px">hari jadi pacarnya kamu 🫶</p>
   <p class="sub delay3" style="margin-top:20px;background:rgba(255,255,255,.35);padding:12px 18px;border-radius:16px;color:#5c1a00;max-width:340px">
     Dan sejak chat pertama kita sampai hari ini…<br>kita ngobrol <b>SETIAP HARI</b>.<br><b>NOL hari bolos. Streak sempurna. 🔥</b>
@@ -148,7 +163,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
   <div class="blob" style="width:260px;height:260px;background:#00ffc8;top:-70px;right:-80px"></div>
   <div class="floaty-holder" data-emo="💬"></div>
   <div class="kicker" style="color:#8affe0">total chat setahun</div>
-  <h1 class="big num" style="font-size:64px;margin:10px 0" data-count="110315">0</h1>
+  <h1 class="big num" style="font-size:clamp(42px,14.5vw,64px);margin:10px 0" data-count="110315">0</h1>
   <p class="sub delay1" style="color:#c8fff1">pesan. Seratus sepuluh ribu. Bacanya aja seminggu 😭</p>
   <div class="vs">
     <div class="vsrow delay2"><div class="lbl"><span>Shirath</span><span class="num" data-count="57348">0</span></div><div class="meter"><i data-w="100" style="background:linear-gradient(90deg,#00c9a7,#8affe0)"></i></div></div>
@@ -161,7 +176,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="17000" data-track="2" style="background:linear-gradient(170deg,#ffecd2,#fcb69f 70%,#ff9a8b);color:#5c2a00;text-align:center;align-items:center">
   <div class="sun" style="opacity:.65"></div>
   <div class="kicker" style="color:#a34700">ritual pagi kita</div>
-  <h1 class="big" style="font-size:46px;margin:10px 0;color:#5c2a00">“mowning<br>bebee” ☀️</h1>
+  <h1 class="big" style="font-size:clamp(33px,10.5vw,46px);margin:10px 0;color:#5c2a00">“mowning<br>bebee” ☀️</h1>
   <p class="sub delay1" style="color:#7a3b00;max-width:330px"><b class="num" data-count="380">0</b> ucapan selamat pagi dalam setahun —<br><b class="num" data-count="244">0</b> versi <i>“mowning”</i>, dan cuma <b>8</b> yang nulis “good morning” dengan bener 💀</p>
   <div class="reveal show" style="margin-top:22px;width:100%;max-width:340px;opacity:1;transform:none">
     <div class="bubble" style="text-align:left"><div class="who">Firda · 5 Des 2025, 04.26</div>Mowning sayangku, im redi tu gowwwwww</div>
@@ -173,7 +188,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="0" data-track="3" data-quiz style="background:linear-gradient(160deg,#c31432,#ff416c 60%,#ff7b9c)">
   <div class="blob" style="width:240px;height:240px;background:#ffd3e0;top:-60px;left:-60px"></div>
   <div class="kicker" style="color:#ffd3e0">QUIZ TIME 💘</div>
-  <h1 class="big" style="font-size:30px;margin:12px 0">Siapa yang bilang<br>“I love u” duluan?</h1>
+  <h1 class="big" style="font-size:clamp(23px,7.4vw,30px);margin:12px 0">Siapa yang bilang<br>“I love u” duluan?</h1>
   <div class="qopts">
     <button class="qopt delay1" data-a="0">😎 Shirath lah, gentle</button>
     <button class="qopt delay2" data-a="1">🙋‍♀️ Firda, gasabar</button>
@@ -190,7 +205,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="17000" data-track="4" style="background:linear-gradient(160deg,#41295a,#7b2ff7 55%,#2f80ed)">
   <div class="blob" style="width:250px;height:250px;background:#b388ff;bottom:-60px;left:-70px"></div>
   <div class="kicker" style="color:#d0b3ff">battle panggilan sayang</div>
-  <h1 class="big" style="font-size:34px;margin:10px 0">“sayaang” 🆚 “bebe”</h1>
+  <h1 class="big" style="font-size:clamp(25px,8vw,34px);margin:10px 0">“sayaang” 🆚 “bebe”</h1>
   <div class="vs">
     <div class="vsrow delay1"><div class="lbl"><span>💜 sayang / sayaang</span><span class="num" data-count="4452">0</span></div><div class="meter"><i data-w="100" style="background:linear-gradient(90deg,#b388ff,#f107a3)"></i></div></div>
     <div class="vsrow delay2"><div class="lbl"><span>🩵 bebe / beb</span><span class="num" data-count="3827">0</span></div><div class="meter"><i data-w="86" style="background:linear-gradient(90deg,#4dd0ff,#00c9a7)"></i></div></div>
@@ -205,7 +220,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="17000" data-track="5" style="background:linear-gradient(165deg,#f7971e,#ffd200 65%,#fff176);color:#4a2c00">
   <div class="floaty-holder" data-emo="📣"></div>
   <div class="kicker" style="color:#8a5300">tim hore pribadi</div>
-  <h1 class="big" style="font-size:42px;margin:10px 0;color:#4a2c00">SEMANGAT!!! 📣</h1>
+  <h1 class="big" style="font-size:clamp(28px,9vw,40px);margin:10px 0;color:#4a2c00">SEMANGAT!!! 📣</h1>
   <p class="sub delay1" style="color:#6b4300">Saling nyemangatin <b class="num" data-count="671">0</b> kali dalam setahun — termasuk semua “semangaatt”, “smangattt”, dan “SEMANGATT KERJANYAA!!” 😤</p>
   <div class="vs">
     <div class="vsrow delay2"><div class="lbl" style="color:#4a2c00"><span>Firda nyemangatin</span><span><span class="num" data-count="339">0</span>×</span></div><div class="meter" style="background:rgba(0,0,0,.15)"><i data-w="100" style="background:#e65100"></i></div></div>
@@ -218,7 +233,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="17000" data-track="6" style="background:linear-gradient(160deg,#11998e,#38ef7d);color:#053b2c;text-align:center;align-items:center">
   <div class="floaty-holder" data-emo="😭"></div>
   <div class="kicker" style="color:#04553e">dokter bilang ketawa itu sehat</div>
-  <h1 class="big" style="font-size:52px;margin:12px 0;color:#053b2c"><span class="wk">W</span><span class="wk" style="animation-delay:.1s">K</span><span class="wk" style="animation-delay:.2s">W</span><span class="wk" style="animation-delay:.3s">K</span><span class="wk" style="animation-delay:.4s">W</span><span class="wk" style="animation-delay:.5s">K</span></h1>
+  <h1 class="big" style="font-size:clamp(30px,10vw,46px);margin:12px 0;color:#053b2c"><span class="wk">W</span><span class="wk" style="animation-delay:.1s">K</span><span class="wk" style="animation-delay:.2s">W</span><span class="wk" style="animation-delay:.3s">K</span><span class="wk" style="animation-delay:.4s">W</span><span class="wk" style="animation-delay:.5s">K</span></h1>
   <p class="sub delay1" style="color:#04553e"><b class="num" data-count="10310">0</b> kali ketawa bareng lewat chat 😂</p>
   <p class="sub delay3" style="margin-top:18px;background:rgba(255,255,255,.4);padding:14px 18px;border-radius:16px;color:#053b2c;max-width:340px">
     Emoji favorit kita berdua? Sama persis:<br><span style="font-size:40px">😭</span><br><b class="num" data-count="4922">0</b>× — nangis tapi bahagia
@@ -230,7 +245,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="0" data-track="7" data-quiz style="background:linear-gradient(160deg,#ff6a00,#ee0979)">
   <div class="blob" style="width:240px;height:240px;background:#ffc371;bottom:-70px;right:-60px"></div>
   <div class="kicker" style="color:#ffdcc7">QUIZ TIME 🔥</div>
-  <h1 class="big" style="font-size:28px;margin:12px 0">Rekor kita: berapa chat terbanyak dalam SATU hari?</h1>
+  <h1 class="big" style="font-size:clamp(21px,6.8vw,28px);margin:12px 0">Rekor kita: berapa chat terbanyak dalam SATU hari?</h1>
   <div class="qopts">
     <button class="qopt delay1" data-a="0">± 500 pesan</button>
     <button class="qopt delay2" data-a="0">± 900 pesan</button>
@@ -249,7 +264,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
   <div class="blob" style="width:240px;height:240px;background:#7f9cf5;top:-60px;left:-60px"></div>
   <div class="kicker" style="color:#aab8ff">nelfon terooos</div>
   <div class="rings"><span class="r"></span><span class="r"></span><span class="r"></span><span class="core">📞</span></div>
-  <h1 class="big num" style="font-size:78px" data-count="845">0</h1>
+  <h1 class="big num" style="font-size:clamp(56px,19vw,78px)" data-count="845">0</h1>
   <p class="sub delay1" style="color:#ccd6ff">kali telfonan & video call</p>
   <p class="sub delay3" style="margin-top:20px;background:rgba(255,255,255,.1);padding:14px 18px;border-radius:16px;max-width:340px;color:#e2e8ff">
     Total <b class="num" data-count="566">0</b> jam ngobrol =<br><b>24 hari nonstop</b> denger suara masing-masing 🎧
@@ -260,7 +275,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <!-- 10 · ROUGH DAYS -->
 <section class="slide" data-dur="17000" data-track="9" style="background:linear-gradient(170deg,#3a1c71,#d76d77 70%,#ffaf7b)">
   <div class="kicker" style="color:#ffd9c9">gak selalu cerah, tapi…</div>
-  <h1 class="big" style="font-size:34px;margin:12px 0">± <span class="num" data-count="26">0</span> hari<br>kita sempet berantem 🌧️</h1>
+  <h1 class="big" style="font-size:clamp(25px,8vw,34px);margin:12px 0">± <span class="num" data-count="26">0</span> hari<br>kita sempet berantem 🌧️</h1>
   <p class="sub delay2" style="color:#ffe6db">Dari setahun penuh. Artinya 330+ hari lainnya? Cerah ☀️</p>
   <div class="vs">
     <div class="vsrow delay3"><div class="lbl"><span>🙏 “sorry / maaf” — Shirath</span><span><span class="num" data-count="293">0</span>×</span></div><div class="meter"><i data-w="100" style="background:#ffaf7b"></i></div></div>
@@ -275,7 +290,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 <section class="slide" data-dur="17000" data-track="10" style="background:linear-gradient(160deg,#fdf0e6,#ffd9e8 60%,#ffb7d5);color:#5c1035">
   <div class="floaty-holder" data-emo="💗"></div>
   <div class="kicker" style="color:#a3255f">nama asli? gak kenal</div>
-  <h1 class="big" style="font-size:32px;margin:10px 0;color:#5c1035">Panggilan<br>sepanjang tahun 🏷️</h1>
+  <h1 class="big" style="font-size:clamp(24px,7.8vw,32px);margin:10px 0;color:#5c1035">Panggilan<br>sepanjang tahun 🏷️</h1>
   <div class="grid" style="grid-template-columns:1fr">
     <div class="cell delay1" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b style="color:#c2185b">“shii” — 457×</b><span style="color:#7a1f47">panggilan Firda buat Shirath</span></div>
     <div class="cell delay2" style="background:rgba(255,255,255,.65);border-color:#ffb7d5"><b style="color:#7b2ff7">“cantik” — 315×</b><span style="color:#7a1f47">kata Shirath ke Firda (bener sih)</span></div>
@@ -285,10 +300,10 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
 </section>
 
 <!-- 12 · FINALE -->
-<section class="slide" data-dur="0" data-track="11" style="background:linear-gradient(160deg,#4a00b0,#7b2ff7 40%,#f107a3 80%,#ff8ae2);text-align:center;align-items:center">
+<section id="finale" class="slide" data-dur="0" data-track="11" style="background:linear-gradient(160deg,#4a00b0,#7b2ff7 40%,#f107a3 80%,#ff8ae2);text-align:center;align-items:center">
   <canvas id="confetti"></canvas>
   <div class="kicker" style="color:#ffd6f6">the wrap · 02.08.2026</div>
-  <h1 class="big" style="font-size:34px;margin:10px 0">SATU TAHUN<br>KITA 💜</h1>
+  <h1 class="big" style="font-size:clamp(24px,7.6vw,30px);margin:8px 0">SATU TAHUN<br>KITA 💜</h1>
   <div class="grid" style="width:100%">
     <div class="cell delay1"><b>365</b><span>hari bersama</span></div>
     <div class="cell delay1"><b>110.315</b><span>pesan</span></div>
@@ -303,7 +318,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:'Plus Jakarta 
     <div class="cell delay5"><b>284</b><span>i love u · 142:142 💌</span></div>
     <div class="cell delay5"><b>∞</b><span>tahun berikutnya</span></div>
   </div>
-  <p class="sub" style="margin-top:20px;color:#ffe3fa;animation-delay:1.7s">Makasih udah jadi rumah paling rame,<br>paling hangat, setahun ini.<br><b>Happy anniversary, sayaang. I love u.</b> 🫶</p>
+  <p class="sub" style="margin-top:14px;color:#ffe3fa;animation-delay:1.7s;font-size:14px">Makasih udah jadi rumah paling rame,<br>paling hangat, setahun ini.<br><b>Happy anniversary, sayaang. I love u.</b> 🫶</p>
   <button id="replayBtn" onclick="location.reload()">↺ PUTAR LAGI</button>
 </section>
 
@@ -338,13 +353,19 @@ function preloadTrack(i){
   a.src = TRACKS[i];
   preloaded[i] = a;
 }
+let switchId = 0;
 function playTrack(i){
   if (i === curTrack) return;
   curTrack = i;
+  const my = ++switchId;
   fade(0, () => {
-    player.src = TRACKS[i];
-    try { player.volume = 0; } catch(e){}
-    player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
+    if (my !== switchId) return;            // a newer switch superseded this one
+    setTimeout(() => {                      // little breath so the new song enters smoothly
+      if (my !== switchId) return;
+      player.src = TRACKS[i];
+      try { player.volume = 0; } catch(e){}
+      player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
+    }, 300);
   });
 }
 let fadeInt = null;
@@ -354,14 +375,14 @@ function fade(target, cb){
   let steps = 0;
   fadeInt = setInterval(() => {
     steps++;
-    const v = player.volume + (target > player.volume ? .2 : -.2);
+    const v = player.volume + (target > player.volume ? .09 : -.09);
     try { player.volume = Math.min(1, Math.max(0, v)); } catch(e){}
-    // fast fade (~250ms); force-finish quickly even where iOS ignores volume
-    if (Math.abs(player.volume - target) < .05 || steps > 8){
+    // ~0.6s fade; force-finish even where iOS ignores volume
+    if (Math.abs(player.volume - target) < .05 || steps > 13){
       try { player.volume = target; } catch(e){}
       clearInterval(fadeInt); cb && cb();
     }
-  }, 40);
+  }, 50);
 }
 /* missing mp3 → keep the previous song playing instead of going silent */
 let lastGood = null;
