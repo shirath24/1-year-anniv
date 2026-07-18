@@ -378,12 +378,9 @@ function playTrack(i){
   const my = ++switchId;
   fade(0, () => {
     if (my !== switchId) return;            // a newer switch superseded this one
-    setTimeout(() => {                      // little breath so the new song enters smoothly
-      if (my !== switchId) return;
-      player.src = TRACKS[i];
-      setVol(0);
-      player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
-    }, 300);
+    player.src = TRACKS[i];
+    setVol(0);
+    player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
   });
 }
 let fadeInt = null;
