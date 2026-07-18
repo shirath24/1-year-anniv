@@ -329,6 +329,15 @@ slides.slice(1).forEach(() => {
 const bars = [...barsEl.querySelectorAll('.bar i')];
 
 /* ================= AUDIO ================= */
+/* fetch upcoming tracks in the background so slide changes don't wait on the network */
+const preloaded = {};
+function preloadTrack(i){
+  if (i < 0 || i >= TRACKS.length || preloaded[i]) return;
+  const a = new Audio();
+  a.preload = 'auto';
+  a.src = TRACKS[i];
+  preloaded[i] = a;
+}
 function playTrack(i){
   if (i === curTrack) return;
   curTrack = i;
@@ -345,14 +354,14 @@ function fade(target, cb){
   let steps = 0;
   fadeInt = setInterval(() => {
     steps++;
-    const v = player.volume + (target > player.volume ? .08 : -.08);
+    const v = player.volume + (target > player.volume ? .2 : -.2);
     try { player.volume = Math.min(1, Math.max(0, v)); } catch(e){}
-    // iOS ignores volume changes → force-finish after ~1.2s so the track still switches
-    if (Math.abs(player.volume - target) < .05 || steps > 20){
+    // fast fade (~250ms); force-finish quickly even where iOS ignores volume
+    if (Math.abs(player.volume - target) < .05 || steps > 8){
       try { player.volume = target; } catch(e){}
       clearInterval(fadeInt); cb && cb();
     }
-  }, 60);
+  }, 40);
 }
 /* missing mp3 → keep the previous song playing instead of going silent */
 let lastGood = null;
@@ -445,6 +454,9 @@ function show(i){
   muteBtn.classList.toggle('show', idx > 0);
   countUps(s); decorate(s);
   playTrack(+s.dataset.track);
+  // warm up the next two slides' songs
+  if (slides[idx+1]) preloadTrack(+slides[idx+1].dataset.track);
+  if (slides[idx+2]) preloadTrack(+slides[idx+2].dataset.track);
   if (idx === slides.length - 1) confettiGo();
   // auto-advance
   const dur = +s.dataset.dur;
