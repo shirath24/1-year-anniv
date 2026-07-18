@@ -542,10 +542,10 @@ function burst(el){
 
 /* tap zones */
 const holdDelay = 220; let holdT = null, held = false;
-function down(){ held = false; holdT = setTimeout(() => { held = true; paused = true; player.pause(); }, holdDelay); }
+function down(){ held = false; holdT = setTimeout(() => { held = true; paused = true; }, holdDelay); } // music keeps playing during hold
 function up(dir){
   clearTimeout(holdT);
-  if (held){ held = false; paused = false; player.play().catch(()=>{}); return; }
+  if (held){ held = false; paused = false; return; }
   if (!started) return;
   const s = slides[idx];
   if (dir > 0 && s.dataset.quiz !== undefined && !s.dataset.done) return; // must answer quiz
@@ -557,7 +557,7 @@ L.addEventListener('pointerup', () => up(-1)); R.addEventListener('pointerup', (
 // finger dragged away / gesture cancelled → release hold cleanly, no navigation
 ['pointercancel','pointerleave'].forEach(ev => [L, R].forEach(z => z.addEventListener(ev, () => {
   clearTimeout(holdT);
-  if (held){ held = false; paused = false; player.play().catch(()=>{}); }
+  if (held){ held = false; paused = false; }
 })));
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ') up(1);
