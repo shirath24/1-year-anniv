@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#12061f">
-<title>Firda & Shirath — One Year Rewind</title>
+<title>Firda ♥ Shirath — One Year Rewind</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
@@ -334,19 +334,23 @@ function playTrack(i){
   curTrack = i;
   fade(0, () => {
     player.src = TRACKS[i];
-    player.volume = 0;
-    player.play().then(() => { if (!muted) fade(1); }).catch(() => {}); // missing file → silent, no crash
+    try { player.volume = 0; } catch(e){}
+    player.play().then(() => fade(1)).catch(() => {}); // missing file → silent, no crash
   });
 }
 let fadeInt = null;
 function fade(target, cb){
   clearInterval(fadeInt);
   if (!player.src) { cb && cb(); return; }
+  let steps = 0;
   fadeInt = setInterval(() => {
+    steps++;
     const v = player.volume + (target > player.volume ? .08 : -.08);
-    player.volume = Math.min(1, Math.max(0, v));
-    if (Math.abs(player.volume - target) < .05) {
-      player.volume = target; clearInterval(fadeInt); cb && cb();
+    try { player.volume = Math.min(1, Math.max(0, v)); } catch(e){}
+    // iOS ignores volume changes → force-finish after ~1.2s so the track still switches
+    if (Math.abs(player.volume - target) < .05 || steps > 20){
+      try { player.volume = target; } catch(e){}
+      clearInterval(fadeInt); cb && cb();
     }
   }, 60);
 }
@@ -356,14 +360,14 @@ player.addEventListener('playing', () => { lastGood = player.src; });
 player.addEventListener('error', () => {
   if (lastGood && player.src !== lastGood){
     player.src = lastGood;
-    player.play().then(() => { if (!muted) fade(1); }).catch(() => {});
+    player.play().then(() => fade(1)).catch(() => {});
   }
 });
 muteBtn.addEventListener('click', e => {
   e.stopPropagation();
   muted = !muted;
   muteBtn.textContent = muted ? '🔇' : '🔊';
-  player.volume = muted ? 0 : 1;
+  player.muted = muted;   // .muted works on iOS; .volume does not
 });
 
 /* ================= COUNT-UP ================= */
@@ -422,8 +426,14 @@ function show(i){
   slides[idx].classList.remove('active');
   idx = i;
   const s = slides[idx];
-  // restart entry animations
-  s.classList.remove('active'); void s.offsetWidth; s.classList.add('active');
+  // restart entry animations — Safari needs an explicit animation reset, class toggling isn't enough
+  s.classList.remove('active');
+  const animEls = [s, ...s.querySelectorAll('*')].filter(el =>
+    !el.classList.contains('floaty') && !el.classList.contains('heart')); // keep particles' inline timings
+  animEls.forEach(el => el.style.animation = 'none');
+  void s.offsetWidth;
+  animEls.forEach(el => el.style.animation = '');
+  s.classList.add('active');
   // reset quiz state on (re)entry
   if (s.dataset.quiz !== undefined && !s.dataset.done){
     s.querySelectorAll('.qopt').forEach(b => b.classList.remove('correct','wrong'));
@@ -502,7 +512,7 @@ const holdDelay = 220; let holdT = null, held = false;
 function down(){ held = false; holdT = setTimeout(() => { held = true; paused = true; player.pause(); }, holdDelay); }
 function up(dir){
   clearTimeout(holdT);
-  if (held){ held = false; paused = false; if (!muted) player.play().catch(()=>{}); return; }
+  if (held){ held = false; paused = false; player.play().catch(()=>{}); return; }
   if (!started) return;
   const s = slides[idx];
   if (dir > 0 && s.dataset.quiz !== undefined && !s.dataset.done) return; // must answer quiz
@@ -514,7 +524,7 @@ L.addEventListener('pointerup', () => up(-1)); R.addEventListener('pointerup', (
 // finger dragged away / gesture cancelled → release hold cleanly, no navigation
 ['pointercancel','pointerleave'].forEach(ev => [L, R].forEach(z => z.addEventListener(ev, () => {
   clearTimeout(holdT);
-  if (held){ held = false; paused = false; if (!muted) player.play().catch(()=>{}); }
+  if (held){ held = false; paused = false; player.play().catch(()=>{}); }
 })));
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ') up(1);
@@ -525,7 +535,8 @@ document.addEventListener('keydown', e => {
 document.getElementById('startBtn').addEventListener('click', e => {
   e.stopPropagation();
   started = true;
-  player.src = TRACKS[0]; player.volume = 1; curTrack = 0;
+  player.src = TRACKS[0]; curTrack = 0;
+  try { player.volume = 1; } catch(e){}
   player.play().catch(() => {});
   show(1);
 });
